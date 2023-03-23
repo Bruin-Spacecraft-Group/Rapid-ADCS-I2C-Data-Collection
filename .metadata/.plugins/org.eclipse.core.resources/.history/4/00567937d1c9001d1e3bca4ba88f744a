@@ -36,28 +36,6 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define BNO055_ADDR 0x29<<1 // PULL ADR HIGH
-#define BNO055_ACCEL_X 0x08
-#define BNO055_ACCEL_Y 0x0a
-#define BNO055_ACCEL_Z 0x0c
-#define BNO055_MAG_X 0x0e
-#define BNO055_MAG_Y 0x10
-#define BNO055_MAG_Z 0x12
-#define BNO055_GYRO_X 0x14
-#define BNO055_GYRO_Y 0x16
-#define BNO055_GYRO_Z 0x18
-#define BNO055_HEADING 0x1a
-#define BNO055_ROLL 0x1c
-#define BNO055_PITCH 0x1e
-#define BNO055_QUAT_W 0x20
-#define BNO055_QUAT_X 0x22
-#define BNO055_QUAT_Y 0x24
-#define BNO055_QUAT_Z 0x26
-#define BNO055_LIA_X 0x28
-#define BNO055_LIA_Y 0x2a
-#define BNO055_LIA_Z 0x2c
-#define BNO055_GRAV_X 0x2e
-#define BNO055_GRAV_Y 0x30
-#define BNO055_GRAV_Z 0x32
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -125,12 +103,6 @@ int main(void)
   double xAccel = 0;
   double yAccel = 0;
   double zAccel = 0;
-  double xMag = 0;
-  double yMag = 0;
-  double zMag = 0;
-  double xGyro = 0;
-  double yGyro = 0;
-  double zGyro = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -138,39 +110,16 @@ int main(void)
   while (1)
   {
 	  BNO055_INIT();
-	  xAccel = BNO055_GET_DATA(BNO055_ACCEL_X, 2);
-	  yAccel = BNO055_GET_DATA(BNO055_ACCEL_Y, 2);
-	  zAccel = BNO055_GET_DATA(BNO055_ACCEL_Z, 2);
-	  xMag = BNO055_GET_DATA(BNO055_MAG_X, 2);
-	  yMag = BNO055_GET_DATA(BNO055_MAG_Y, 2);
-	  zMag = BNO055_GET_DATA(BNO055_MAG_Z, 2);
-	  xGyro = BNO055_GET_DATA(BNO055_GYRO_X, 2);
-	  yGyro = BNO055_GET_DATA(BNO055_GYRO_Y, 2);
-	  zGyro = BNO055_GET_DATA(BNO055_GYRO_Z, 2);
+	  xAccel = BNO055_GET_DATA(0x08, 2);
+	  yAccel = BNO055_GET_DATA(0x0a, 2);
+	  zAccel = BNO055_GET_DATA(0x0c, 2);
 
-	  UART_PRINT_TEXT("Accelerometer: ");
 	  UART_PRINT_TEXT("( ");
 	  UART_PRINT_VAL(xAccel);
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(yAccel);
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(zAccel);
-	  UART_PRINT_TEXT(" )\n");
-	  UART_PRINT_TEXT("Magnetometer: ");
-	  UART_PRINT_TEXT("( ");
-	  UART_PRINT_VAL(xMag);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(yMag);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(zMag);
-	  UART_PRINT_TEXT(" )\n");
-	  UART_PRINT_TEXT("Gyro: ");
-	  UART_PRINT_TEXT("( ");
-	  UART_PRINT_VAL(xGyro);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(yGyro);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(zGyro);
 	  UART_PRINT_TEXT(" )\n");
 	  HAL_Delay(100); // 1 second delay
 

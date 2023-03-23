@@ -1,26 +1,130 @@
-15:17:01 **** Incremental Build of configuration Debug for project BNO055_SENSOR ****
+16:19:53 **** Incremental Build of configuration Debug for project BNO055_SENSOR ****
 make -j3 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:112:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  112 |    UART_PRINT_TEXT("Read value: ");
-      |                    ^~~~~~~~~~~~~~
+../Core/Src/main.c:129:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  129 |    UART_PRINT_TEXT("Accelerometer:\n");
+      |                    ^~~~~~~~~~~~~~~~~~
       |                    |
       |                    char *
 ../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
    62 | void UART_PRINT_TEXT(uint8_t* MSG);
       |                      ~~~~~~~~~^~~
-../Core/Src/main.c:114:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  114 |    UART_PRINT_TEXT("\n");
+../Core/Src/main.c:130:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  130 |    UART_PRINT_TEXT("( ");
       |                    ^~~~
       |                    |
       |                    char *
 ../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
    62 | void UART_PRINT_TEXT(uint8_t* MSG);
       |                      ~~~~~~~~~^~~
+../Core/Src/main.c:132:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  132 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:134:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  134 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:136:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  136 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:137:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  137 |    UART_PRINT_TEXT("Magnetometer:\n");
+      |                    ^~~~~~~~~~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:138:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  138 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:140:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  140 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:142:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  142 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:144:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  144 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:145:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  145 |    UART_PRINT_TEXT("Gyro:\n");
+      |                    ^~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:146:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  146 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:148:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  148 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:150:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  150 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:152:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  152 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:62:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   62 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
 ../Core/Src/main.c: In function 'UART_PRINT_VAL':
-../Core/Src/main.c:308:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  308 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+../Core/Src/main.c:346:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  346 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
       |                             ^~~~~
       |                             |
       |                             char *
@@ -32,8 +136,8 @@ In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
  1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
 ../Core/Src/main.c: In function 'UART_PRINT_TEXT':
-../Core/Src/main.c:311:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
-  311 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+../Core/Src/main.c:349:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  349 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
       |                                         ^~~
       |                                         |
       |                                         uint8_t * {aka unsigned char *}
@@ -42,8 +146,8 @@ In file included from ../Core/Src/main.c:24:
    41 | size_t  strlen (const char *);
       |                 ^~~~~~~~~~~~
 ../Core/Src/main.c: In function 'BNO055_INIT':
-../Core/Src/main.c:315:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
-  315 |  HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x3D, 1, 0x07, 1, 100); //OPR_MODE = AMG (turn on all sensors)
+../Core/Src/main.c:353:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  353 |  HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x3D, 1, 0x07, 1, 100); //OPR_MODE = AMG (turn on all sensors)
       |                                                  ^~~~
       |                                                  |
       |                                                  int
@@ -60,15 +164,186 @@ Finished building target: BNO055_SENSOR.elf
 arm-none-eabi-size   BNO055_SENSOR.elf 
 arm-none-eabi-objdump -h -S  BNO055_SENSOR.elf  > "BNO055_SENSOR.list"
    text	   data	    bss	    dec	    hex	filename
-  19980	    120	   1808	  21908	   5594	BNO055_SENSOR.elf
+  20468	    120	   1808	  22396	   577c	BNO055_SENSOR.elf
 Finished building: default.size.stdout
  
 Finished building: BNO055_SENSOR.list
  
-15:17:13 **** Incremental Build of configuration Debug for project BNO055_SENSOR ****
+16:20:03 **** Incremental Build of configuration Debug for project BNO055_SENSOR ****
 make -j3 all 
 arm-none-eabi-size   BNO055_SENSOR.elf 
    text	   data	    bss	    dec	    hex	filename
-  19980	    120	   1808	  21908	   5594	BNO055_SENSOR.elf
+  20468	    120	   1808	  22396	   577c	BNO055_SENSOR.elf
 Finished building: default.size.stdout
+ 
+16:36:10 **** Incremental Build of configuration Debug for project BNO055_SENSOR ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:151:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  151 |    UART_PRINT_TEXT("Accelerometer: ");
+      |                    ^~~~~~~~~~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:152:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  152 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:154:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  154 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:156:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  156 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:158:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  158 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:159:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  159 |    UART_PRINT_TEXT("Magnetometer: ");
+      |                    ^~~~~~~~~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:160:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  160 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:162:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  162 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:164:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  164 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:166:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  166 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:167:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  167 |    UART_PRINT_TEXT("Gyro: ");
+      |                    ^~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:168:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  168 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:170:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  170 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:172:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  172 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:174:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  174 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:84:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   84 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c: In function 'UART_PRINT_VAL':
+../Core/Src/main.c:368:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  368 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                             ^~~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1611:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'UART_PRINT_TEXT':
+../Core/Src/main.c:371:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  371 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                         ^~~
+      |                                         |
+      |                                         uint8_t * {aka unsigned char *}
+In file included from ../Core/Src/main.c:24:
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.200.202301161003/tools/arm-none-eabi/include/string.h:41:17: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+   41 | size_t  strlen (const char *);
+      |                 ^~~~~~~~~~~~
+../Core/Src/main.c: In function 'BNO055_INIT':
+../Core/Src/main.c:375:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  375 |  HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x3D, 1, 0x07, 1, 100); //OPR_MODE = AMG (turn on all sensors)
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:280,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h:630:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int'
+  630 |                                     uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                          ~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "BNO055_SENSOR.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/BNO055_SENSOR/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BNO055_SENSOR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BNO055_SENSOR.elf
+ 
+arm-none-eabi-size   BNO055_SENSOR.elf 
+arm-none-eabi-objdump -h -S  BNO055_SENSOR.elf  > "BNO055_SENSOR.list"
+   text	   data	    bss	    dec	    hex	filename
+  20468	    120	   1808	  22396	   577c	BNO055_SENSOR.elf
+Finished building: default.size.stdout
+ 
+Finished building: BNO055_SENSOR.list
  
