@@ -24,7 +24,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
-
+#include <stdlib.h>
 
 /* USER CODE END Includes */
 
@@ -35,6 +35,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define BNO055_ADDR 0x29<<1 // PULL ADR HIGH
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,13 +49,6 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-static const uint8_t BNO055_ADDR = 0x28 << 1; // COM3_STATE(PIN17): LOW --> Left shifted as it is a 7 bit address
-static const uint8_t ACC_DATA_X_LSB = 0x08; // 7 bit / least significant byte
-static const uint8_t ACC_DATA_X_MSB = 0x09; // 7 bit / most significant byte
-
-
-
-
 
 /* USER CODE END PV */
 
@@ -64,7 +58,10 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
-
+void UART_PRINT_VAL(double value);
+void UART_PRINT_TEXT(uint8_t* MSG);
+void BNO055_INIT(void);
+double BNO055_X_ACCEL(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -79,10 +76,6 @@ static void MX_I2C1_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	HAL_StatusTypeDef ret;
-	uint8_t buf[14];
-	int16_t val;
-	float xData;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -106,40 +99,20 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
+  double xAccel = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  BNO055_INIT();
+	  xAccel = BNO055_X_ACCEL();
 
-	  buf[0] = ACC_DATA_X_MSB; // tell BNO055 we want to read LSB from ACC Data
-	  buf[1] = ACC_DATA_X_LSB; // tell BNO055 we want to read MSB from ACC Data
-
-	  ret = HAL_I2C_Master_Transmit(&hi2c1, BNO055_ADDR, buf, 1, 100);  // the timeout is 100 ms
-
-	  if (ret!=HAL_OK){
-		  strcpy((char*)buf, "Error Rx\r\n");
-	  } else{
-
-		  ret = HAL_I2C_Master_Receive(&hi2c1, BNO055_ADDR, buf, 2, 100); // Receive 2 bytes of data
-
-		  if (ret!=HAL_OK){
-			  strcpy((char*)buf, "Error Rx\r\n");
-
-		  } else{
-			  //Combine the two bytes received
-			  val = ((int8_t)buf[0] << 8 | (int8_t)buf[1]);
-
-			  // convert to float
-			  xData = (val / 16384.0);
-			  sprintf((char*)buf, "%u.%u C\r\n", (unsigned int)xData);
-		  }
-	  }
-
-	    HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
-	    HAL_Delay(1000); // 1 second delay
+	  UART_PRINT_TEXT("Read value: ");
+	  UART_PRINT_VAL(xAccel);
+	  UART_PRINT_TEXT("\n");
+	  HAL_Delay(100); // 1 second delay
 
     /* USER CODE END WHILE */
 
@@ -210,7 +183,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.Timing = 0x10909CEC;
+  hi2c1.Init.Timing = 0xF010F3FE;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -316,7 +289,46 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void UART_PRINT_VAL(double value){
+	char total[50];
+	sprintf(total, "%i", (int)value);
+	strcat(total, ".");
+	int y = 0;
+	int val1 = 10;
+	for(int a=0;a<6;a++){
+		val1 = 1;
+		for(int b=0;b<a;b++){
+			val1 *= 10;
+		}
+		y = abs((int)(value * val1 * 10) - ((int)(value * val1) * 10));
+		char temp[10];
+		sprintf(temp, "%i", y);
+		strcat(total, temp);
+	}
+	HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+}
+void UART_PRINT_TEXT(uint8_t* MSG){
+	HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+}
 
+void BNO055_INIT(void){
+	HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x3D, 1, 0x07, 1, 100); //OPR_MODE = AMG (turn on all sensors)
+}
+double BNO055_X_ACCEL(void){
+	double val = 0;
+	uint16_t value = 0;
+	uint8_t receiveData[2];
+	HAL_I2C_Mem_Read(&hi2c1, BNO055_ADDR, 0x08, 1, receiveData, 2, 100);
+	value = (receiveData[1] << 8 | receiveData[0]);
+	if(value > 0x7fff){
+		value = ~value;
+		val = -value / 100.0;
+	}
+	else{
+		val = value / 100.0;
+	}
+	return val;
+}
 /* USER CODE END 4 */
 
 /**

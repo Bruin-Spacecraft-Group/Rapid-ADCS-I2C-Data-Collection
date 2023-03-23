@@ -1,6 +1,10 @@
-main.c:79:5:main	3
-main.c:155:6:SystemClock_Config	3
-main.c:202:13:MX_I2C1_Init	4
-main.c:250:13:MX_USART2_UART_Init	5
-main.c:298:13:MX_GPIO_Init	1
-main.c:326:6:Error_Handler	1
+main.c:76:5:main	1
+main.c:128:6:SystemClock_Config	3
+main.c:175:13:MX_I2C1_Init	4
+main.c:223:13:MX_USART2_UART_Init	5
+main.c:271:13:MX_GPIO_Init	1
+main.c:292:6:UART_PRINT_VAL	3
+main.c:310:6:UART_PRINT_TEXT	1
+main.c:314:6:BNO055_INIT	1
+main.c:317:8:BNO055_X_ACCEL	2
+main.c:338:6:Error_Handler	1
