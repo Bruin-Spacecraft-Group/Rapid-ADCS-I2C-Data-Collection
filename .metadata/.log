@@ -3467,3 +3467,6 @@ java.io.IOException: Error opening /dev/cu.usbmodem143203: Resource busy
 	at org.eclipse.remote.serial.core.SerialPortConnection.getCommandShell(SerialPortConnection.java:97)
 	at org.eclipse.remote.internal.console.TerminalConsoleConnector$1.run(TerminalConsoleConnector.java:140)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-03-23 16:54:19.211
+!MESSAGE Indexed 'SEN0373_SENSOR' (23 sources, 83 headers) in 5.79 sec: 5,437 declarations; 26,957 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0062%)

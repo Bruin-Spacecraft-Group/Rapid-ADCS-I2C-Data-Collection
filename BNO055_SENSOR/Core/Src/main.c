@@ -172,7 +172,7 @@ int main(void)
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(zGyro);
 	  UART_PRINT_TEXT(" )\n");
-	  HAL_Delay(100); // 1 second delay
+	  HAL_Delay(100);
 
     /* USER CODE END WHILE */
 
@@ -354,17 +354,10 @@ void UART_PRINT_VAL(double value){
 	sprintf(total, "%i", (int)value);
 	strcat(total, ".");
 	int y = 0;
-	int val1 = 10;
-	for(int a=0;a<6;a++){
-		val1 = 1;
-		for(int b=0;b<a;b++){
-			val1 *= 10;
-		}
-		y = abs((int)(value * val1 * 10) - ((int)(value * val1) * 10));
-		char temp[10];
-		sprintf(temp, "%i", y);
-		strcat(total, temp);
-	}
+	int val = abs((int)((value - (int)value) * 10000000));
+	char temp[10];
+	sprintf(temp, "%i", val);
+	strcat(total, temp);
 	HAL_UART_Transmit(&huart2, total, strlen(total), 100);
 }
 void UART_PRINT_TEXT(uint8_t* MSG){

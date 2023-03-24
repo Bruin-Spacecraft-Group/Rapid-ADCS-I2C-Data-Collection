@@ -1,0 +1,175 @@
+19:26:36 **** Incremental Build of configuration Debug for project SEN0373_SENSOR ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:140:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  140 |    UART_PRINT_TEXT("Accelerometer: ");
+      |                    ^~~~~~~~~~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:70:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   70 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:141:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  141 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:70:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   70 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:143:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  143 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:70:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   70 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:145:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  145 |    UART_PRINT_TEXT(", ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:70:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   70 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:147:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  147 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:70:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   70 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:120:12: warning: unused variable 'zGyro' [-Wunused-variable]
+  120 |     double zGyro = 0;
+      |            ^~~~~
+../Core/Src/main.c:119:12: warning: unused variable 'yGyro' [-Wunused-variable]
+  119 |     double yGyro = 0;
+      |            ^~~~~
+../Core/Src/main.c:118:12: warning: unused variable 'xGyro' [-Wunused-variable]
+  118 |     double xGyro = 0;
+      |            ^~~~~
+../Core/Src/main.c:117:12: warning: unused variable 'zMag' [-Wunused-variable]
+  117 |     double zMag = 0;
+      |            ^~~~
+../Core/Src/main.c:116:12: warning: unused variable 'yMag' [-Wunused-variable]
+  116 |     double yMag = 0;
+      |            ^~~~
+../Core/Src/main.c:115:12: warning: unused variable 'xMag' [-Wunused-variable]
+  115 |     double xMag = 0;
+      |            ^~~~
+../Core/Src/main.c: In function 'UART_PRINT_VAL':
+../Core/Src/main.c:355:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  355 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                             ^~~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1611:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:350:6: warning: unused variable 'y' [-Wunused-variable]
+  350 |  int y = 0;
+      |      ^
+../Core/Src/main.c: In function 'UART_PRINT_TEXT':
+../Core/Src/main.c:358:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  358 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                         ^~~
+      |                                         |
+      |                                         uint8_t * {aka unsigned char *}
+In file included from ../Core/Src/main.c:24:
+/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.200.202301161003/tools/arm-none-eabi/include/string.h:41:17: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+   41 | size_t  strlen (const char *);
+      |                 ^~~~~~~~~~~~
+../Core/Src/main.c: In function 'BMX160_INIT':
+../Core/Src/main.c:362:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  362 |  HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x43, 1, 0x04, 1, 100); //set GYR_RANGE to be full precision (+/- 125 deg/s)
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:280,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h:630:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int'
+  630 |                                     uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/main.c:363:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  363 |  HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7a, 1, 0x15, 1, 100); //set step config to normal mode
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:280,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h:630:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int'
+  630 |                                     uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/main.c:364:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  364 |  HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7b, 1, 0x03, 1, 100); //set step config to normal mode
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:280,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h:630:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int'
+  630 |                                     uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/main.c:365:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  365 |  HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, 0x11, 1, 100); //set accelerometer pmu mode to normal
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:280,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h:630:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int'
+  630 |                                     uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/main.c:366:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  366 |  HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, 0x15, 1, 100); //set gyro pmu mode to normal
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:280,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h:630:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int'
+  630 |                                     uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/main.c:367:50: warning: passing argument 5 of 'HAL_I2C_Mem_Write' makes pointer from integer without a cast [-Wint-conversion]
+  367 |  HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, 0x19, 1, 100); //set magnetometer pmu mode to normal
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:280,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h:630:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'int'
+  630 |                                     uint16_t MemAddSize, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                          ~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "SEN0373_SENSOR.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/SEN0373_SENSOR/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SEN0373_SENSOR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: SEN0373_SENSOR.elf
+ 
+arm-none-eabi-size   SEN0373_SENSOR.elf 
+arm-none-eabi-objdump -h -S  SEN0373_SENSOR.elf  > "SEN0373_SENSOR.list"
+   text	   data	    bss	    dec	    hex	filename
+  20304	    120	   1808	  22232	   56d8	SEN0373_SENSOR.elf
+Finished building: default.size.stdout
+ 
+Finished building: SEN0373_SENSOR.list
+ 
+
+19:26:37 Build Finished. 0 errors, 20 warnings. (took 793ms)
+

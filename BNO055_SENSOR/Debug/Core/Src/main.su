@@ -3,8 +3,8 @@
 ../Core/Src/main.c:235:13:MX_I2C1_Init	8	static
 ../Core/Src/main.c:283:13:MX_USART2_UART_Init	8	static
 ../Core/Src/main.c:331:13:MX_GPIO_Init	40	static
-../Core/Src/main.c:352:6:UART_PRINT_VAL	104	static
-../Core/Src/main.c:370:6:UART_PRINT_TEXT	16	static
-../Core/Src/main.c:374:6:BNO055_INIT	24	static
-../Core/Src/main.c:377:8:BNO055_GET_DATA	80	dynamic
-../Core/Src/main.c:398:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.c:352:6:UART_PRINT_VAL	88	static
+../Core/Src/main.c:363:6:UART_PRINT_TEXT	16	static
+../Core/Src/main.c:367:6:BNO055_INIT	24	static
+../Core/Src/main.c:370:8:BNO055_GET_DATA	80	dynamic
+../Core/Src/main.c:391:6:Error_Handler	4	static,ignoring_inline_asm
