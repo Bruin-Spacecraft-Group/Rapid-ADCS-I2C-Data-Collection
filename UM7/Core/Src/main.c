@@ -351,7 +351,7 @@ double UM7_GET_DATA(uint8_t addr){
 	HAL_SPI_Transmit(&hspi1, tx_data, 2, HAL_MAX_DELAY);
 	HAL_SPI_Receive(&hspi1, rx_data, 4, HAL_MAX_DELAY);
 	HAL_GPIO_WritePIN(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	value = (rx_data[3] << 24 | rx_data[2] << 16) | (rx_data[1] << 8 | rx_data[0]);
+	value = (rx_data[0] << 24 | rx_data[1] << 16) | (rx_data[2] << 8 | rx_data[3]);
 	val = value;
 	return val;
 }
