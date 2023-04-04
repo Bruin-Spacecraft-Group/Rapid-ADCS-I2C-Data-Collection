@@ -39,3 +39,40 @@
 2023-04-04 09:47:26,155 [INFO] ProjectBuilder:4505 - Time for Generating toolchain IDE Files: 2880mS.
 2023-04-04 09:47:26,156 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 0mS.
 2023-04-04 09:47:26,158 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 0mS.
+2023-04-04 11:48:37,902 [INFO] Gpio:273 - dependency for GPIO [SPI1, SYS, USART2]
+2023-04-04 11:48:46,150 [INFO] Gpio:273 - dependency for GPIO [SPI1, SYS, USART2]
+2023-04-04 11:50:00,507 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 538111720 Bytes (769654784)
+2023-04-04 11:50:00,681 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 553210000 Bytes (769654784)
+2023-04-04 11:50:01,145 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 604696296 Bytes (769654784)
+2023-04-04 11:50:01,749 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2023-04-04 11:50:01,750 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2023-04-04 11:50:01,750 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-04-04 11:50:01,750 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-04-04 11:50:01,750 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USART
+2023-04-04 11:50:01,750 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-04-04 11:50:01,751 [INFO] CodeGenerator:793 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.8.0.202302231600//db/
+2023-04-04 11:50:02,278 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/license.tmp_save
+2023-04-04 11:50:02,461 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/license.tmp
+2023-04-04 11:50:02,621 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/gpio.tmp_save
+2023-04-04 11:50:02,785 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/gpio.tmp
+2023-04-04 11:50:03,183 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_it.c_save
+2023-04-04 11:50:03,469 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_it.c
+2023-04-04 11:50:03,478 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_it.h_save
+2023-04-04 11:50:03,695 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_it.h
+2023-04-04 11:50:03,708 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_hal_msp.c_save
+2023-04-04 11:50:03,936 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_hal_msp.c
+2023-04-04 11:50:03,940 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/system.tmp_save
+2023-04-04 11:50:04,036 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/system.tmp
+2023-04-04 11:50:04,045 [INFO] CodeEngine:311 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_hal_conf.h_save
+2023-04-04 11:50:04,137 [INFO] CodeEngine:335 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_hal_conf.h
+2023-04-04 11:50:04,257 [WARN] IPConfigManager:2937 - Warning: the RefConfig RCC_CommonPeriphClockConfig is not available in your config.xml file
+2023-04-04 11:50:04,369 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/main.h_save
+2023-04-04 11:50:04,629 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/main.h
+2023-04-04 11:50:04,634 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/main.c_save
+2023-04-04 11:50:04,825 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/main.c
+2023-04-04 11:50:06,258 [INFO] ProjectBuilder:2996 - Time for Copy HAL[1] : 413mS.
+2023-04-04 11:50:06,262 [INFO] ProjectBuilder:4304 - Project Generator version: 3.19.2
+2023-04-04 11:50:06,910 [INFO] ConfigFileManager:1483 - The Die is : DIE468
+2023-04-04 11:50:13,857 [INFO] ProjectBuilder:4505 - Time for Generating toolchain IDE Files: 7595mS.
+2023-04-04 11:50:13,858 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 1mS.
+2023-04-04 11:50:13,859 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 0mS.

@@ -106,6 +106,8 @@ int main(void)
 	double xGyro = 0;
 	double yGyro = 0;
 	double zGyro = 0;
+
+	HAL_GPIO_WritePIN(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -296,7 +298,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LD2_Pin */
   GPIO_InitStruct.Pin = LD2_Pin;
@@ -328,9 +340,19 @@ void UART_PRINT_TEXT(uint8_t* MSG){
 void UM7_INIT(void){
 
 }
-double UM7_GET_DATA(uint8_t addr, uint16_t dataSize){
+double UM7_GET_DATA(uint8_t addr){
 	double val = 0;
-
+	uint32_t value = 0;
+	uint8_t tx_data[2];
+	uint8_t rx_data[4];
+	tx_data[0] = 0x00;
+	tx_data[1] = addr;
+	HAL_GPIO_WritePIN(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi1, tx_data, 2, HAL_MAX_DELAY);
+	HAL_SPI_Receive(&hspi1, rx_data, 4, HAL_MAX_DELAY);
+	HAL_GPIO_WritePIN(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	value = (rx_data[3] << 24 | rx_data[2] << 16) | (rx_data[1] << 8 | rx_data[0]);
+	val = value;
 	return val;
 }
 /* USER CODE END 4 */
