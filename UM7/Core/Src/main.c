@@ -134,7 +134,7 @@ int main(void)
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(zGyro);
 	  UART_PRINT_TEXT(" )\n");
-	  HAL_Delay(100);
+	  HAL_Delay(150);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
