@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="GET_DATA"/>
 		<list key="findhistory">
+			<item value="GET_DATA"/>
+			<item value="&amp;hspi1"/>
+			<item value="baud"/>
 			<item value="SEN0373"/>
 			<item value="BNO055"/>
 			<item value="20"/>

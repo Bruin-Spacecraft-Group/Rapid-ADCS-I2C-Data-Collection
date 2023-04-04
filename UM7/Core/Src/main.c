@@ -58,7 +58,7 @@ void UART_PRINT_VAL(double value);
 void UART_PRINT_TEXT(uint8_t* MSG);
 
 void UM7_INIT(void);
-double UM7_GET_DATA(uint8_t addr, uint16_t dataSize);
+double UM7_GET_DATA(uint8_t addr);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -107,7 +107,7 @@ int main(void)
 	double yGyro = 0;
 	double zGyro = 0;
 
-	HAL_GPIO_WritePIN(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -347,10 +347,10 @@ double UM7_GET_DATA(uint8_t addr){
 	uint8_t rx_data[4];
 	tx_data[0] = 0x00;
 	tx_data[1] = addr;
-	HAL_GPIO_WritePIN(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi1, tx_data, 2, HAL_MAX_DELAY);
 	HAL_SPI_Receive(&hspi1, rx_data, 4, HAL_MAX_DELAY);
-	HAL_GPIO_WritePIN(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 	value = (rx_data[0] << 24 | rx_data[1] << 16) | (rx_data[2] << 8 | rx_data[3]);
 	val = value;
 	return val;
