@@ -1,2 +1,41 @@
-2023-03-23 11:49:40,574 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
-2023-03-23 16:07:14,879 [ERROR] ConfigurationRetriever:142 - IOException on connection: connect timed out
+2023-04-04 09:45:26,206 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-04-04 09:45:30,420 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-04-04 09:45:32,050 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-04-04 09:45:32,161 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-04-04 09:46:35,855 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-04-04 09:46:36,000 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2023-04-04 09:47:18,448 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 533217792 Bytes (769654784)
+2023-04-04 09:47:18,600 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 548946432 Bytes (769654784)
+2023-04-04 09:47:20,233 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 583549440 Bytes (769654784)
+2023-04-04 09:47:20,575 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2023-04-04 09:47:20,575 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2023-04-04 09:47:20,575 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-04-04 09:47:20,575 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-04-04 09:47:20,575 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USART
+2023-04-04 09:47:20,575 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-04-04 09:47:20,576 [INFO] CodeGenerator:793 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.8.0.202302231600//db/
+2023-04-04 09:47:20,841 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/license.tmp_save
+2023-04-04 09:47:20,967 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/license.tmp
+2023-04-04 09:47:21,076 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/gpio.tmp_save
+2023-04-04 09:47:21,195 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/gpio.tmp
+2023-04-04 09:47:21,409 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_it.c_save
+2023-04-04 09:47:21,645 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_it.c
+2023-04-04 09:47:21,648 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_it.h_save
+2023-04-04 09:47:21,713 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_it.h
+2023-04-04 09:47:21,719 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_hal_msp.c_save
+2023-04-04 09:47:21,841 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/stm32g4xx_hal_msp.c
+2023-04-04 09:47:21,845 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/system.tmp_save
+2023-04-04 09:47:22,120 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/MXTmpFiles/system.tmp
+2023-04-04 09:47:22,125 [INFO] CodeEngine:311 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_hal_conf.h_save
+2023-04-04 09:47:22,222 [INFO] CodeEngine:335 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/stm32g4xx_hal_conf.h
+2023-04-04 09:47:22,247 [WARN] IPConfigManager:2937 - Warning: the RefConfig RCC_CommonPeriphClockConfig is not available in your config.xml file
+2023-04-04 09:47:22,261 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/main.h_save
+2023-04-04 09:47:22,369 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Inc/main.h
+2023-04-04 09:47:22,372 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/main.c_save
+2023-04-04 09:47:22,482 [INFO] CodeEngine:279 - Generated code: /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/Core/Src/main.c
+2023-04-04 09:47:23,272 [INFO] ProjectBuilder:2996 - Time for Copy HAL[1] : 180mS.
+2023-04-04 09:47:23,275 [INFO] ProjectBuilder:4304 - Project Generator version: 3.19.2
+2023-04-04 09:47:23,610 [INFO] ConfigFileManager:1483 - The Die is : DIE468
+2023-04-04 09:47:26,155 [INFO] ProjectBuilder:4505 - Time for Generating toolchain IDE Files: 2880mS.
+2023-04-04 09:47:26,156 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 0mS.
+2023-04-04 09:47:26,158 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 0mS.
