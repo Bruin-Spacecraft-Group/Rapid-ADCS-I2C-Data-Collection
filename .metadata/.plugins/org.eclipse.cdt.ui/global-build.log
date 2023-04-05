@@ -1,154 +1,82 @@
-14:13:01 **** Incremental Build of configuration Debug for project UM7 ****
+17:26:47 **** Incremental Build of configuration Debug for project UM7 ****
 make -j3 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:119:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  119 |    UART_PRINT_TEXT("Accelerometer: ");
+../Core/Src/main.c:120:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  120 |    UART_PRINT_TEXT("Accelerometer: ");
       |                    ^~~~~~~~~~~~~~~~~
       |                    |
       |                    char *
 ../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
    58 | void UART_PRINT_TEXT(uint8_t* MSG);
       |                      ~~~~~~~~~^~~
-../Core/Src/main.c:120:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  120 |    UART_PRINT_TEXT("( ");
+../Core/Src/main.c:121:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  121 |    UART_PRINT_TEXT("( ");
       |                    ^~~~
       |                    |
       |                    char *
 ../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
    58 | void UART_PRINT_TEXT(uint8_t* MSG);
       |                      ~~~~~~~~~^~~
-../Core/Src/main.c:122:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  122 |    UART_PRINT_TEXT(", ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:124:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  124 |    UART_PRINT_TEXT(", ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:126:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  126 |    UART_PRINT_TEXT(" )\n");
+../Core/Src/main.c:145:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  145 |    UART_PRINT_TEXT(" )\n");
       |                    ^~~~~~
       |                    |
       |                    char *
 ../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
    58 | void UART_PRINT_TEXT(uint8_t* MSG);
       |                      ~~~~~~~~~^~~
-../Core/Src/main.c:127:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  127 |    UART_PRINT_TEXT("Magnetometer: ");
-      |                    ^~~~~~~~~~~~~~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:128:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  128 |    UART_PRINT_TEXT("( ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:130:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  130 |    UART_PRINT_TEXT(", ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:132:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  132 |    UART_PRINT_TEXT(", ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:134:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  134 |    UART_PRINT_TEXT(" )\n");
-      |                    ^~~~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:135:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  135 |    UART_PRINT_TEXT("Gyro: ");
-      |                    ^~~~~~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:136:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  136 |    UART_PRINT_TEXT("( ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:138:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  138 |    UART_PRINT_TEXT(", ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:140:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  140 |    UART_PRINT_TEXT(", ");
-      |                    ^~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
-../Core/Src/main.c:142:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
-  142 |    UART_PRINT_TEXT(" )\n");
-      |                    ^~~~~~
-      |                    |
-      |                    char *
-../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
-   58 | void UART_PRINT_TEXT(uint8_t* MSG);
-      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:108:9: warning: unused variable 'zGyro' [-Wunused-variable]
+  108 |  double zGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:107:9: warning: unused variable 'yGyro' [-Wunused-variable]
+  107 |  double yGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:106:9: warning: unused variable 'xGyro' [-Wunused-variable]
+  106 |  double xGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:105:9: warning: unused variable 'zMag' [-Wunused-variable]
+  105 |  double zMag = 0;
+      |         ^~~~
+../Core/Src/main.c:104:9: warning: unused variable 'yMag' [-Wunused-variable]
+  104 |  double yMag = 0;
+      |         ^~~~
+../Core/Src/main.c:103:9: warning: unused variable 'xMag' [-Wunused-variable]
+  103 |  double xMag = 0;
+      |         ^~~~
+../Core/Src/main.c:102:9: warning: unused variable 'zAccel' [-Wunused-variable]
+  102 |  double zAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c:101:9: warning: unused variable 'yAccel' [-Wunused-variable]
+  101 |  double yAccel = 0;
+      |         ^~~~~~
 ../Core/Src/main.c: In function 'UART_PRINT_VAL':
-../Core/Src/main.c:327:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
-  327 |  sprintf(total, "%i", (int)value);
+../Core/Src/main.c:330:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  330 |  sprintf(total, "%i", (int)value);
       |  ^~~~~~~
-../Core/Src/main.c:327:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:330:2: warning: incompatible implicit declaration of built-in function 'sprintf'
 ../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
    20 | #include "main.h"
   +++ |+#include <stdio.h>
    21 | 
-../Core/Src/main.c:328:2: warning: implicit declaration of function 'strcat' [-Wimplicit-function-declaration]
-  328 |  strcat(total, ".");
+../Core/Src/main.c:331:2: warning: implicit declaration of function 'strcat' [-Wimplicit-function-declaration]
+  331 |  strcat(total, ".");
       |  ^~~~~~
-../Core/Src/main.c:328:2: warning: incompatible implicit declaration of built-in function 'strcat'
+../Core/Src/main.c:331:2: warning: incompatible implicit declaration of built-in function 'strcat'
 ../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strcat'
    20 | #include "main.h"
   +++ |+#include <string.h>
    21 | 
-../Core/Src/main.c:330:12: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
-  330 |  int val = abs((int)((value - (int)value) * 10000000));
+../Core/Src/main.c:333:12: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  333 |  int val = abs((int)((value - (int)value) * 10000000));
       |            ^~~
-../Core/Src/main.c:334:36: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
-  334 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+../Core/Src/main.c:337:36: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
       |                                    ^~~~~~
-../Core/Src/main.c:334:36: warning: incompatible implicit declaration of built-in function 'strlen'
-../Core/Src/main.c:334:36: note: include '<string.h>' or provide a declaration of 'strlen'
-../Core/Src/main.c:334:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  334 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+../Core/Src/main.c:337:36: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:337:36: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:337:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
       |                             ^~~~~
       |                             |
       |                             char *
@@ -159,27 +87,518 @@ In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1611:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
  1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:329:6: warning: unused variable 'y' [-Wunused-variable]
-  329 |  int y = 0;
+../Core/Src/main.c:332:6: warning: unused variable 'y' [-Wunused-variable]
+  332 |  int y = 0;
       |      ^
 ../Core/Src/main.c: In function 'UART_PRINT_TEXT':
-../Core/Src/main.c:337:34: warning: incompatible implicit declaration of built-in function 'strlen'
-  337 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+../Core/Src/main.c:340:34: warning: incompatible implicit declaration of built-in function 'strlen'
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
       |                                  ^~~~~~
-../Core/Src/main.c:337:34: note: include '<string.h>' or provide a declaration of 'strlen'
-../Core/Src/main.c:337:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
-  337 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+../Core/Src/main.c:340:34: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:340:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
       |                                         ^~~
       |                                         |
       |                                         uint8_t * {aka unsigned char *}
-../Core/Src/main.c:337:41: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+../Core/Src/main.c:340:41: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+../Core/Src/main.c: In function 'UM7_INIT':
+../Core/Src/main.c:344:10: warning: variable 'tx_data1' set but not used [-Wunused-but-set-variable]
+  344 |  uint8_t tx_data1[6];
+      |          ^~~~~~~~
 arm-none-eabi-gcc -o "UM7.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: UM7.elf
  
 arm-none-eabi-size   UM7.elf 
 arm-none-eabi-objdump -h -S  UM7.elf  > "UM7.list"
    text	   data	    bss	    dec	    hex	filename
-  16752	    120	   1832	  18704	   4910	UM7.elf
+  20028	    120	   1832	  21980	   55dc	UM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: UM7.list
+ 
+17:28:13 **** Incremental Build of configuration Debug for project UM7 ****
+make -j3 all 
+arm-none-eabi-size   UM7.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20028	    120	   1832	  21980	   55dc	UM7.elf
+Finished building: default.size.stdout
+ 
+17:37:57 **** Incremental Build of configuration Debug for project UM7 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  120 |    UART_PRINT_TEXT("Accelerometer: ");
+      |                    ^~~~~~~~~~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:121:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  121 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:145:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  145 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:108:9: warning: unused variable 'zGyro' [-Wunused-variable]
+  108 |  double zGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:107:9: warning: unused variable 'yGyro' [-Wunused-variable]
+  107 |  double yGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:106:9: warning: unused variable 'xGyro' [-Wunused-variable]
+  106 |  double xGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:105:9: warning: unused variable 'zMag' [-Wunused-variable]
+  105 |  double zMag = 0;
+      |         ^~~~
+../Core/Src/main.c:104:9: warning: unused variable 'yMag' [-Wunused-variable]
+  104 |  double yMag = 0;
+      |         ^~~~
+../Core/Src/main.c:103:9: warning: unused variable 'xMag' [-Wunused-variable]
+  103 |  double xMag = 0;
+      |         ^~~~
+../Core/Src/main.c:102:9: warning: unused variable 'zAccel' [-Wunused-variable]
+  102 |  double zAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c:101:9: warning: unused variable 'yAccel' [-Wunused-variable]
+  101 |  double yAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c: In function 'UART_PRINT_VAL':
+../Core/Src/main.c:330:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  330 |  sprintf(total, "%i", (int)value);
+      |  ^~~~~~~
+../Core/Src/main.c:330:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:331:2: warning: implicit declaration of function 'strcat' [-Wimplicit-function-declaration]
+  331 |  strcat(total, ".");
+      |  ^~~~~~
+../Core/Src/main.c:331:2: warning: incompatible implicit declaration of built-in function 'strcat'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strcat'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:333:12: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  333 |  int val = abs((int)((value - (int)value) * 10000000));
+      |            ^~~
+../Core/Src/main.c:337:36: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                                    ^~~~~~
+../Core/Src/main.c:337:36: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:337:36: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:337:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                             ^~~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1611:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:332:6: warning: unused variable 'y' [-Wunused-variable]
+  332 |  int y = 0;
+      |      ^
+../Core/Src/main.c: In function 'UART_PRINT_TEXT':
+../Core/Src/main.c:340:34: warning: incompatible implicit declaration of built-in function 'strlen'
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                  ^~~~~~
+../Core/Src/main.c:340:34: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:340:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                         ^~~
+      |                                         |
+      |                                         uint8_t * {aka unsigned char *}
+../Core/Src/main.c:340:41: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+../Core/Src/main.c: In function 'UM7_INIT':
+../Core/Src/main.c:344:10: warning: variable 'tx_data1' set but not used [-Wunused-but-set-variable]
+  344 |  uint8_t tx_data1[6];
+      |          ^~~~~~~~
+../Core/Src/main.c: In function 'UM7_GET_DATA':
+../Core/Src/main.c:352:10: warning: variable 'tx_data' set but not used [-Wunused-but-set-variable]
+  352 |  uint8_t tx_data[2];
+      |          ^~~~~~~
+../Core/Src/main.c:351:11: warning: variable 'value' set but not used [-Wunused-but-set-variable]
+  351 |  uint32_t value = 0;
+      |           ^~~~~
+../Core/Src/main.c:361:18: warning: 'rx_data[0]' is used uninitialized in this function [-Wuninitialized]
+  361 |  value = (rx_data[0] << 8 | rx_data[1]);
+      |           ~~~~~~~^~~
+../Core/Src/main.c:361:36: warning: 'rx_data[1]' is used uninitialized in this function [-Wuninitialized]
+  361 |  value = (rx_data[0] << 8 | rx_data[1]);
+      |                             ~~~~~~~^~~
+arm-none-eabi-gcc -o "UM7.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: UM7.elf
+ 
+arm-none-eabi-size   UM7.elf 
+arm-none-eabi-objdump -h -S  UM7.elf  > "UM7.list"
+   text	   data	    bss	    dec	    hex	filename
+  16692	    120	   1832	  18644	   48d4	UM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: UM7.list
+ 
+17:42:14 **** Incremental Build of configuration Debug for project UM7 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:124:4: warning: "/*" within comment [-Wcomment]
+  124 |    /*
+      |     
+../Core/Src/main.c:108:9: warning: unused variable 'zGyro' [-Wunused-variable]
+  108 |  double zGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:107:9: warning: unused variable 'yGyro' [-Wunused-variable]
+  107 |  double yGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:106:9: warning: unused variable 'xGyro' [-Wunused-variable]
+  106 |  double xGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:105:9: warning: unused variable 'zMag' [-Wunused-variable]
+  105 |  double zMag = 0;
+      |         ^~~~
+../Core/Src/main.c:104:9: warning: unused variable 'yMag' [-Wunused-variable]
+  104 |  double yMag = 0;
+      |         ^~~~
+../Core/Src/main.c:103:9: warning: unused variable 'xMag' [-Wunused-variable]
+  103 |  double xMag = 0;
+      |         ^~~~
+../Core/Src/main.c:102:9: warning: unused variable 'zAccel' [-Wunused-variable]
+  102 |  double zAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c:101:9: warning: unused variable 'yAccel' [-Wunused-variable]
+  101 |  double yAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c:100:11: warning: unused variable 'xAccel' [-Wunused-variable]
+  100 |    double xAccel = 0;
+      |           ^~~~~~
+../Core/Src/main.c: In function 'UART_PRINT_VAL':
+../Core/Src/main.c:336:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  336 |  sprintf(total, "%i", (int)value);
+      |  ^~~~~~~
+../Core/Src/main.c:336:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:337:2: warning: implicit declaration of function 'strcat' [-Wimplicit-function-declaration]
+  337 |  strcat(total, ".");
+      |  ^~~~~~
+../Core/Src/main.c:337:2: warning: incompatible implicit declaration of built-in function 'strcat'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strcat'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:339:12: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  339 |  int val = abs((int)((value - (int)value) * 10000000));
+      |            ^~~
+../Core/Src/main.c:343:36: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                                    ^~~~~~
+../Core/Src/main.c:343:36: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:343:36: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:343:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  343 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                             ^~~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1611:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:338:6: warning: unused variable 'y' [-Wunused-variable]
+  338 |  int y = 0;
+      |      ^
+../Core/Src/main.c: In function 'UART_PRINT_TEXT':
+../Core/Src/main.c:346:34: warning: incompatible implicit declaration of built-in function 'strlen'
+  346 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                  ^~~~~~
+../Core/Src/main.c:346:34: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:346:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  346 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                         ^~~
+      |                                         |
+      |                                         uint8_t * {aka unsigned char *}
+../Core/Src/main.c:346:41: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+../Core/Src/main.c: In function 'UM7_INIT':
+../Core/Src/main.c:350:10: warning: variable 'tx_data1' set but not used [-Wunused-but-set-variable]
+  350 |  uint8_t tx_data1[6];
+      |          ^~~~~~~~
+../Core/Src/main.c: In function 'UM7_GET_DATA':
+../Core/Src/main.c:358:10: warning: variable 'tx_data' set but not used [-Wunused-but-set-variable]
+  358 |  uint8_t tx_data[2];
+      |          ^~~~~~~
+../Core/Src/main.c:357:11: warning: variable 'value' set but not used [-Wunused-but-set-variable]
+  357 |  uint32_t value = 0;
+      |           ^~~~~
+../Core/Src/main.c:367:18: warning: 'rx_data[0]' is used uninitialized in this function [-Wuninitialized]
+  367 |  value = (rx_data[0] << 8 | rx_data[1]);
+      |           ~~~~~~~^~~
+../Core/Src/main.c:367:36: warning: 'rx_data[1]' is used uninitialized in this function [-Wuninitialized]
+  367 |  value = (rx_data[0] << 8 | rx_data[1]);
+      |                             ~~~~~~~^~~
+arm-none-eabi-gcc -o "UM7.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: UM7.elf
+ 
+arm-none-eabi-size   UM7.elf 
+arm-none-eabi-objdump -h -S  UM7.elf  > "UM7.list"
+   text	   data	    bss	    dec	    hex	filename
+  11752	     20	   1812	  13584	   3510	UM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: UM7.list
+ 
+17:51:40 **** Incremental Build of configuration Debug for project UM7 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  120 |    UART_PRINT_TEXT("Accelerometer: ");
+      |                    ^~~~~~~~~~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:121:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  121 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:145:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  145 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:108:9: warning: unused variable 'zGyro' [-Wunused-variable]
+  108 |  double zGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:107:9: warning: unused variable 'yGyro' [-Wunused-variable]
+  107 |  double yGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:106:9: warning: unused variable 'xGyro' [-Wunused-variable]
+  106 |  double xGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:105:9: warning: unused variable 'zMag' [-Wunused-variable]
+  105 |  double zMag = 0;
+      |         ^~~~
+../Core/Src/main.c:104:9: warning: unused variable 'yMag' [-Wunused-variable]
+  104 |  double yMag = 0;
+      |         ^~~~
+../Core/Src/main.c:103:9: warning: unused variable 'xMag' [-Wunused-variable]
+  103 |  double xMag = 0;
+      |         ^~~~
+../Core/Src/main.c:102:9: warning: unused variable 'zAccel' [-Wunused-variable]
+  102 |  double zAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c:101:9: warning: unused variable 'yAccel' [-Wunused-variable]
+  101 |  double yAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c: In function 'UART_PRINT_VAL':
+../Core/Src/main.c:330:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  330 |  sprintf(total, "%i", (int)value);
+      |  ^~~~~~~
+../Core/Src/main.c:330:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:331:2: warning: implicit declaration of function 'strcat' [-Wimplicit-function-declaration]
+  331 |  strcat(total, ".");
+      |  ^~~~~~
+../Core/Src/main.c:331:2: warning: incompatible implicit declaration of built-in function 'strcat'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strcat'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:333:12: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  333 |  int val = abs((int)((value - (int)value) * 10000000));
+      |            ^~~
+../Core/Src/main.c:337:36: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                                    ^~~~~~
+../Core/Src/main.c:337:36: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:337:36: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:337:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                             ^~~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1611:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:332:6: warning: unused variable 'y' [-Wunused-variable]
+  332 |  int y = 0;
+      |      ^
+../Core/Src/main.c: In function 'UART_PRINT_TEXT':
+../Core/Src/main.c:340:34: warning: incompatible implicit declaration of built-in function 'strlen'
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                  ^~~~~~
+../Core/Src/main.c:340:34: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:340:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                         ^~~
+      |                                         |
+      |                                         uint8_t * {aka unsigned char *}
+../Core/Src/main.c:340:41: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+../Core/Src/main.c: In function 'UM7_INIT':
+../Core/Src/main.c:344:10: warning: variable 'tx_data1' set but not used [-Wunused-but-set-variable]
+  344 |  uint8_t tx_data1[6];
+      |          ^~~~~~~~
+arm-none-eabi-gcc -o "UM7.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: UM7.elf
+ 
+arm-none-eabi-size   UM7.elf 
+arm-none-eabi-objdump -h -S  UM7.elf  > "UM7.list"
+   text	   data	    bss	    dec	    hex	filename
+  20036	    120	   1832	  21988	   55e4	UM7.elf
+Finished building: default.size.stdout
+ 
+Finished building: UM7.list
+ 
+19:59:57 **** Incremental Build of configuration Debug for project UM7 ****
+make -j3 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  120 |    UART_PRINT_TEXT("Accelerometer: ");
+      |                    ^~~~~~~~~~~~~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:121:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  121 |    UART_PRINT_TEXT("( ");
+      |                    ^~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:145:20: warning: pointer targets in passing argument 1 of 'UART_PRINT_TEXT' differ in signedness [-Wpointer-sign]
+  145 |    UART_PRINT_TEXT(" )\n");
+      |                    ^~~~~~
+      |                    |
+      |                    char *
+../Core/Src/main.c:58:31: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   58 | void UART_PRINT_TEXT(uint8_t* MSG);
+      |                      ~~~~~~~~~^~~
+../Core/Src/main.c:108:9: warning: unused variable 'zGyro' [-Wunused-variable]
+  108 |  double zGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:107:9: warning: unused variable 'yGyro' [-Wunused-variable]
+  107 |  double yGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:106:9: warning: unused variable 'xGyro' [-Wunused-variable]
+  106 |  double xGyro = 0;
+      |         ^~~~~
+../Core/Src/main.c:105:9: warning: unused variable 'zMag' [-Wunused-variable]
+  105 |  double zMag = 0;
+      |         ^~~~
+../Core/Src/main.c:104:9: warning: unused variable 'yMag' [-Wunused-variable]
+  104 |  double yMag = 0;
+      |         ^~~~
+../Core/Src/main.c:103:9: warning: unused variable 'xMag' [-Wunused-variable]
+  103 |  double xMag = 0;
+      |         ^~~~
+../Core/Src/main.c:102:9: warning: unused variable 'zAccel' [-Wunused-variable]
+  102 |  double zAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c:101:9: warning: unused variable 'yAccel' [-Wunused-variable]
+  101 |  double yAccel = 0;
+      |         ^~~~~~
+../Core/Src/main.c: In function 'UART_PRINT_VAL':
+../Core/Src/main.c:330:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  330 |  sprintf(total, "%i", (int)value);
+      |  ^~~~~~~
+../Core/Src/main.c:330:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:331:2: warning: implicit declaration of function 'strcat' [-Wimplicit-function-declaration]
+  331 |  strcat(total, ".");
+      |  ^~~~~~
+../Core/Src/main.c:331:2: warning: incompatible implicit declaration of built-in function 'strcat'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strcat'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:333:12: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+  333 |  int val = abs((int)((value - (int)value) * 10000000));
+      |            ^~~
+../Core/Src/main.c:337:36: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                                    ^~~~~~
+../Core/Src/main.c:337:36: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:337:36: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:337:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  337 |  HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+      |                             ^~~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:348,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:1611:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1611 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:332:6: warning: unused variable 'y' [-Wunused-variable]
+  332 |  int y = 0;
+      |      ^
+../Core/Src/main.c: In function 'UART_PRINT_TEXT':
+../Core/Src/main.c:340:34: warning: incompatible implicit declaration of built-in function 'strlen'
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                  ^~~~~~
+../Core/Src/main.c:340:34: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:340:41: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+  340 |  HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+      |                                         ^~~
+      |                                         |
+      |                                         uint8_t * {aka unsigned char *}
+../Core/Src/main.c:340:41: note: expected 'const char *' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+../Core/Src/main.c: In function 'UM7_INIT':
+../Core/Src/main.c:344:10: warning: variable 'tx_data1' set but not used [-Wunused-but-set-variable]
+  344 |  uint8_t tx_data1[6];
+      |          ^~~~~~~~
+arm-none-eabi-gcc -o "UM7.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: UM7.elf
+ 
+arm-none-eabi-size   UM7.elf 
+arm-none-eabi-objdump -h -S  UM7.elf  > "UM7.list"
+   text	   data	    bss	    dec	    hex	filename
+  20028	    120	   1832	  21980	   55dc	UM7.elf
 Finished building: default.size.stdout
  
 Finished building: UM7.list

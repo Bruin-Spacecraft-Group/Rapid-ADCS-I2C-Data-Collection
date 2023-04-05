@@ -115,10 +115,12 @@ int main(void)
   while (1)
   {
 	  UM7_INIT();
+	  xAccel = UM7_GET_DATA(0x5a);
 
 	  UART_PRINT_TEXT("Accelerometer: ");
 	  UART_PRINT_TEXT("( ");
 	  UART_PRINT_VAL(xAccel);
+	  /*
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(yAccel);
 	  UART_PRINT_TEXT(", ");
@@ -139,6 +141,7 @@ int main(void)
 	  UART_PRINT_VAL(yGyro);
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(zGyro);
+	  */
 	  UART_PRINT_TEXT(" )\n");
 	  HAL_Delay(150);
     /* USER CODE END WHILE */
@@ -338,7 +341,10 @@ void UART_PRINT_TEXT(uint8_t* MSG){
 }
 
 void UM7_INIT(void){
-
+	uint8_t tx_data1[6];
+	tx_data1[0] = 0x01;
+	//tx_data1[1] =
+	//HAL_GPIO_Transmit
 }
 double UM7_GET_DATA(uint8_t addr){
 	double val = 0;
@@ -351,7 +357,7 @@ double UM7_GET_DATA(uint8_t addr){
 	HAL_SPI_Transmit(&hspi1, tx_data, 2, HAL_MAX_DELAY);
 	HAL_SPI_Receive(&hspi1, rx_data, 4, HAL_MAX_DELAY);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	value = (rx_data[0] << 24 | rx_data[1] << 16) | (rx_data[2] << 8 | rx_data[3]);
+	value = (rx_data[0] << 8 | rx_data[1]);
 	val = value;
 	return val;
 }
