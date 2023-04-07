@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include<stdlib.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -108,14 +108,17 @@ int main(void)
 	double zGyro = 0;
 
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+
+	HAL_Delay(250);
+	UM7_INIT();
+	HAL_Delay(250);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  UM7_INIT();
-	  xAccel = UM7_GET_DATA(0x5a);
+	  xAccel = UM7_GET_DATA(0x65);
 
 	  UART_PRINT_TEXT("Accelerometer: ");
 	  UART_PRINT_TEXT("( ");
@@ -220,7 +223,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -329,11 +332,14 @@ void UART_PRINT_VAL(double value){
 	char total[50];
 	sprintf(total, "%i", (int)value);
 	strcat(total, ".");
-	int y = 0;
-	int val = abs((int)((value - (int)value) * 10000000));
 	char temp[10];
-	sprintf(temp, "%i", val);
-	strcat(total, temp);
+	double currentVal = (value - (int) value);
+	for(int a=0;a<6;a++){
+		currentVal *= 10;
+		sprintf(temp, "%i", abs((int)currentVal));
+		strcat(total, temp);
+		currentVal -= (int)currentVal;
+	}
 	HAL_UART_Transmit(&huart2, total, strlen(total), 100);
 }
 void UART_PRINT_TEXT(uint8_t* MSG){
@@ -341,14 +347,37 @@ void UART_PRINT_TEXT(uint8_t* MSG){
 }
 
 void UM7_INIT(void){
-	uint8_t tx_data1[6];
-	tx_data1[0] = 0x01;
-	//tx_data1[1] =
-	//HAL_GPIO_Transmit
+	uint8_t tx_data2[4] = {0x00, 0x00, 0x00, 0x00};
+	uint8_t tx_data1[4] = {0x00, 0x00, 0x00, 0xff};
+	uint8_t tx_data3[4] = {0x00, 0x00, 0x00, 0xff};
+	UM7_WRITE(0xac, tx_data2); // reset to factory settings
+	HAL_Delay(1);
+	UM7_WRITE(0x02, tx_data2); // raw data rate (Hz)
+	UM7_WRITE(0x04, tx_data2); // processed data rate (Hz)
+}
+void UM7_WRITE(uint8_t addr, uint8_t data[4]){
+	uint8_t tx_data[6] = {0x01, addr, data[0], data[1], data[2], data[3]};
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi1, tx_data, 6, 100);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+}
+double power(double a, int b){
+	double temp = a;
+    if(b == 0){
+        return 1;
+    }
+    else{
+        for(int t=0;t<abs(b)-1;t++){
+            temp *= temp;
+        }
+    }
+    if(b < 1){
+        temp = 1.0 / temp;
+    }
+    return temp;
 }
 double UM7_GET_DATA(uint8_t addr){
 	double val = 0;
-	uint32_t value = 0;
 	uint8_t tx_data[2];
 	uint8_t rx_data[4];
 	tx_data[0] = 0x00;
@@ -357,8 +386,11 @@ double UM7_GET_DATA(uint8_t addr){
 	HAL_SPI_Transmit(&hspi1, tx_data, 2, HAL_MAX_DELAY);
 	HAL_SPI_Receive(&hspi1, rx_data, 4, HAL_MAX_DELAY);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	value = (rx_data[0] << 8 | rx_data[1]);
-	val = value;
+	//value_exp = ((rx_data[0] & 0x7f) << 1) | (rx_data[1] >> 7);
+	//value_frac = ((rx_data[1] & 0x7f) << 16) | (rx_data[2] << 8 | rx_data[3]);
+	//calc1 = power(2.0,value_exp - 127);
+	//calc2 = rx_data[2];
+	val = rx_data[0];
 	return val;
 }
 /* USER CODE END 4 */
