@@ -60,8 +60,8 @@ all: main-build
 main-build: UM7.elf secondary-outputs
 
 # Tool invocations
-UM7.elf UM7.map: $(OBJS) $(USER_OBJS) /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "UM7.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/UM7/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+UM7.elf UM7.map: $(OBJS) $(USER_OBJS) C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\UM7\STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "UM7.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\UM7\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -60,8 +60,8 @@ all: main-build
 main-build: BNO055_SENSOR.elf secondary-outputs
 
 # Tool invocations
-BNO055_SENSOR.elf BNO055_SENSOR.map: $(OBJS) $(USER_OBJS) /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/BNO055_SENSOR/STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "BNO055_SENSOR.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/BNO055_SENSOR/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BNO055_SENSOR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+BNO055_SENSOR.elf BNO055_SENSOR.map: $(OBJS) $(USER_OBJS) C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\BNO055_SENSOR\STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "BNO055_SENSOR.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\BNO055_SENSOR\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BNO055_SENSOR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

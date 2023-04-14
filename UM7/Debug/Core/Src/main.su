@@ -6,6 +6,7 @@
 ../Core/Src/main.c:331:6:UART_PRINT_VAL	96	static
 ../Core/Src/main.c:345:6:UART_PRINT_TEXT	16	static
 ../Core/Src/main.c:349:6:UM7_INIT	24	static
-../Core/Src/main.c:373:8:power	40	static
-../Core/Src/main.c:388:8:UM7_GET_DATA	32	static
-../Core/Src/main.c:411:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.c:358:6:UM7_WRITE	24	static
+../Core/Src/main.c:364:8:power	40	static
+../Core/Src/main.c:379:8:UM7_GET_DATA	32	static
+../Core/Src/main.c:402:6:Error_Handler	4	static,ignoring_inline_asm

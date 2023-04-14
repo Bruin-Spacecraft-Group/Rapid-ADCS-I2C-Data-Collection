@@ -6,6 +6,7 @@ main.c:296:13:MX_GPIO_Init	1
 main.c:331:6:UART_PRINT_VAL	2
 main.c:345:6:UART_PRINT_TEXT	1
 main.c:349:6:UM7_INIT	1
-main.c:373:8:power	4
-main.c:388:8:UM7_GET_DATA	1
-main.c:411:6:Error_Handler	1
+main.c:358:6:UM7_WRITE	1
+main.c:364:8:power	4
+main.c:379:8:UM7_GET_DATA	1
+main.c:402:6:Error_Handler	1

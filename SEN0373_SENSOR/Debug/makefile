@@ -60,8 +60,8 @@ all: main-build
 main-build: SEN0373_SENSOR.elf secondary-outputs
 
 # Tool invocations
-SEN0373_SENSOR.elf SEN0373_SENSOR.map: $(OBJS) $(USER_OBJS) /Users/gabriellamunn/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/SEN0373_SENSOR/STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "SEN0373_SENSOR.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/gabriellamunn/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/SEN0373_SENSOR/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SEN0373_SENSOR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+SEN0373_SENSOR.elf SEN0373_SENSOR.map: $(OBJS) $(USER_OBJS) C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\SEN0373_SENSOR\STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "SEN0373_SENSOR.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\SEN0373_SENSOR\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SEN0373_SENSOR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
