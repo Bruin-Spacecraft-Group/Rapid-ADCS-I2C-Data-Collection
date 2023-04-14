@@ -44,6 +44,11 @@
 #define BMX160_GYRO_X 0x0c
 #define BMX160_GYRO_Y 0x0e
 #define BMX160_GYRO_Z 0x10
+#define MAGN_IF_0 0x4C
+#define MAGN_IF_1 0x4D
+#define MAGN_IF_2 0x4E
+#define MAGN_IF_3 0x4F
+#define MAGN_CONFIG 0x44
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -123,53 +128,60 @@ int main(void)
     HAL_Delay(500);
     BMX160_INIT();
     HAL_Delay(500);
+    BMX160_INIT();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //uint8_t potato[1] = {0b01010101};
-	  //HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7E, 1, potato, 1, HAL_MAX_DELAY);
 
-	  BMX160_INIT();
+
+
+	  /*uint8_t receiveData;
+	  HAL_I2C_Mem_Read(&hi2c1, BMX160_ADDR, 0x02, 1, &receiveData, 1, 100);
+	  UART_PRINT_VAL(receiveData);*/
+
+
 	  xAccel = BMX160_GET_DATA(BMX160_ACCEL_X, 2);
 	  HAL_Delay(1);
+	  /*
 	  yAccel = BMX160_GET_DATA(BMX160_ACCEL_Y, 2);
 	  HAL_Delay(1);
 	  zAccel = BMX160_GET_DATA(BMX160_ACCEL_Z, 2);
+	  HAL_Delay(3);
+
+	  xMag = BMX160_GET_DATA(BMX160_MAG_X, 2);
 	  HAL_Delay(1);
 
-	  double ftyg = 0;
-	  uint8_t receiveData[1];
-	  HAL_I2C_Mem_Read(&hi2c1, BMX160_ADDR, 0x03, 1, receiveData, 1, 100);
-	  ftyg = receiveData[0];
-
-	  /*
-	  xMag = BMX160_GET_DATA(BMX160_MAG_X, 2);
+	  /*uint8_t receivedData;
+	  HAL_I2C_Mem_Read(&hi2c1, BMX160_ADDR, 0x1B, 1, &receivedData, 1, 100);
+	  UART_PRINT_VAL(receivedData);*/
+/*
 	  yMag = BMX160_GET_DATA(BMX160_MAG_Y, 2);
+	  HAL_Delay(1);
 	  zMag = BMX160_GET_DATA(BMX160_MAG_Z, 2);
+	  HAL_Delay(3);
+
 	  xGyro = BMX160_GET_DATA(BMX160_GYRO_X, 2);
+	  HAL_Delay(1);
 	  yGyro = BMX160_GET_DATA(BMX160_GYRO_Y, 2);
+	  HAL_Delay(1);
 	  zGyro = BMX160_GET_DATA(BMX160_GYRO_Z, 2);
+	  HAL_Delay(3);
 	  */
 
-	  //00010010
-
-
-	  UART_PRINT_TEXT("Accelerometer: ");
+      UART_PRINT_TEXT("Accelerometer: ");
 	  UART_PRINT_TEXT("( ");
 	  UART_PRINT_VAL(xAccel);
+	  /*
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(yAccel);
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(zAccel);
+	  */
 	  UART_PRINT_TEXT(" )\n");
-
-	  UART_PRINT_TEXT("Error: ");
-	  UART_PRINT_VAL(ftyg);
-
-	  /*
+/*
 	  UART_PRINT_TEXT("Magnetometer: ");
 	  UART_PRINT_TEXT("( ");
 	  UART_PRINT_VAL(xMag);
@@ -178,6 +190,7 @@ int main(void)
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(zMag);
 	  UART_PRINT_TEXT(" )\n");
+
 	  UART_PRINT_TEXT("Gyro: ");
 	  UART_PRINT_TEXT("( ");
 	  UART_PRINT_VAL(xGyro);
@@ -186,7 +199,7 @@ int main(void)
 	  UART_PRINT_TEXT(", ");
 	  UART_PRINT_VAL(zGyro);
 	  UART_PRINT_TEXT(" )\n");
-	  */
+*/
 	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
@@ -369,15 +382,23 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void UART_PRINT_VAL(double value){
 	char total[50];
-	sprintf(total, "%i", (int)value);
-	strcat(total, ".");
-	int y = 0;
-	int val = abs((int)((value - (int)value) * 10000000));
 	char temp[10];
-	sprintf(temp, "%i", val);
-	strcat(total, temp);
+	if(value < 0){
+	   UART_PRINT_TEXT("-");
+	}
+	sprintf(total, "%i", abs((int)value));
+	strcat(total, ".");
+	double currentVal = (value - (int) value);
+	for(int a=0;a<6;a++){
+		currentVal *= 10;
+		sprintf(temp, "%i", abs((int)currentVal));
+		strcat(total, temp);
+		currentVal -= (int)currentVal;
+	}
 	HAL_UART_Transmit(&huart2, total, strlen(total), 100);
 }
+
+
 void UART_PRINT_TEXT(uint8_t* MSG){
 	HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
 }
@@ -385,24 +406,53 @@ void UART_PRINT_TEXT(uint8_t* MSG){
 void BMX160_INIT(void){
 	uint8_t softreset[1] = {0xB6};
 	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, softreset, 1, HAL_MAX_DELAY); //soft reset
-	HAL_Delay(50);
-	//HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x43, 1, 0x04, 1, 100); //set GYR_RANGE to be full precision (+/- 125 deg/s)
+	uint8_t gyrorange[1] = {0x04};
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x43, 1, gyrorange, 1, 100); //set GYR_RANGE to be full precision (+/- 125 deg/s)
 	uint8_t stepconfig1[1] = {0x15};
 	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7a, 1, stepconfig1, 1, 100); //set step config to normal mode
 	uint8_t stepconfig2[1] = {0x03};
 	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7b, 1, stepconfig2, 1, 100); //set step config to normal mode
-	uint8_t pmumode[1] = {0x11};
-	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, pmumode, 1, HAL_MAX_DELAY); //set accelerometer pmu mode to normal
-	HAL_Delay(10);
-	//HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, 0x15, 1, 100); //set gyro pmu mode to normal
-	//HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, 0x19, 1, 100); //set magnetometer pmu mode to normal
-	uint8_t accelconfig[1] = {0x2B};
-	//HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x40, 1, accelconfig, 1, HAL_MAX_DELAY); // set accel_config to us = 0b0, pw = 0b010, and odr = 0b1011/800 Hz
-	uint8_t accelrange[1] = {0x3};
-	//HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x41, 1, accelrange, 1, HAL_MAX_DELAY); // set accel_range to +/- 2g
+	uint8_t accelpmu[1] = {0x11};
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, accelpmu, 1, 100); //set accelerometer pmu mode to normal
+	HAL_Delay(50);
+	uint8_t gyropmu[1] = {0x15};
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, gyropmu, 1, 100); //set gyro pmu mode to normal
+	HAL_Delay(100);
 
+	uint8_t magpmu[1] = {0x19};
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x7e, 1, magpmu, 1, 100); //set magnetometer pmu mode to normal
+	HAL_Delay(10);
+
+	uint8_t magbuffer[12] = {0x80 /*first setting*/,0x01,0x4B /*sleep mode*/,0x04, 0x51 /*preset xy*/, 0x0E,0x52, /*preset z*/0x02,0x4C,0x42,0x08 /*config*/,0x03};//0x4C,0x42,0x08,0x03};
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_0, 1, &magbuffer[0], 1, 100);
+	HAL_Delay(50);
+
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_3, 1, &magbuffer[1], 1, 100);
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_2, 1, &magbuffer[2], 1, 100);
+
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_3, 1, &magbuffer[3], 1, 100);
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_2, 1, &magbuffer[4], 1, 100);
+
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_3, 1, &magbuffer[5], 1, 100);
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_2, 1, &magbuffer[6], 1, 100);
+
+	HAL_I2C_Mem_Write(&hi2c1,BMX160_ADDR, MAGN_IF_3, 1, &magbuffer[7], 1, 100);
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_2, 1, &magbuffer[8], 1, 100);
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_1, 1, &magbuffer[9], 1, 100);
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_CONFIG, 1, &magbuffer[10], 1, 100);
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, MAGN_IF_0, 1, &magbuffer[11], 1, 100);
+	HAL_Delay(50);
+
+
+/*
+	uint8_t accelconfig[1] = {0x2B};
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x40, 1, accelconfig, 1, HAL_MAX_DELAY); // set accel_config to us = 0b0, pw = 0b010, and odr = 0b1011/800 Hz
+	uint8_t accelrange[1] = {0x3};
+	HAL_I2C_Mem_Write(&hi2c1, BMX160_ADDR, 0x41, 1, accelrange, 1, HAL_MAX_DELAY); // set accel_range to +/- 2g*/
 
 }
+
+
 double BMX160_GET_DATA(uint8_t addr, uint16_t dataSize){
 	double val = 0;
 	uint16_t value = 0;
@@ -416,7 +466,10 @@ double BMX160_GET_DATA(uint8_t addr, uint16_t dataSize){
 	else{
 		val = value;
 	}
-	return val; //1LSB = 0.000061035mg
+
+	val *= 0.000061035; // (1/(2^15)) to get g
+
+	return val;
 }
 /* USER CODE END 4 */
 
