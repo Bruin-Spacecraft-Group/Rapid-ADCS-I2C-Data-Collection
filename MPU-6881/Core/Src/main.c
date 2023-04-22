@@ -21,7 +21,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,6 +34,20 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define MPU6881_ADDR 0x69 // PULL ADR HIGH
+#define ACCEL_XOUT_H 0x3B
+#define ACCEL_XOUT_L 0x3C
+#define ACCEL_YOUT_H 0x3D
+#define ACCEL_YOUT_L 0x3E
+#define ACCEL_ZOUT_H 0x3F
+#define ACCEL_ZOUT_L 0x40
+
+#define GYRO_XOUT_H 0x43
+#define GYRO_XOUT_L 0x44
+#define GYRO_YOUT_H 0x45
+#define GYRO_YOUT_L 0x46
+#define GYRO_ZOUT_H 0x47
+#define GYRO_ZOUT_L 0x48
 
 /* USER CODE END PD */
 
@@ -40,6 +57,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -50,8 +69,13 @@ UART_HandleTypeDef huart2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
+void UART_PRINT_VAL(double value);
+void UART_PRINT_TEXT(uint8_t* MSG);
 
+void MPU6881_INIT(void);
+double MPU6881_GET_DATA(uint8_t addr, uint16_t dataSize);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -88,14 +112,61 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  double xAccel = 0;
+  double yAccel = 0;
+  double zAccel = 0;
+  double xGyro = 0;
+  double yGyro = 0;
+  double zGyro = 0;
 
+  HAL_Delay(100);
+  MPU6881_INIT();
+  HAL_Delay(500);
+  MPU6881_INIT();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+
+
+
+	  xAccel = MPU6881_GET_DATA(ACCEL_XOUT_H, 2); // this will read H reg and then L reg?
+	  yAccel = MPU6881_GET_DATA(ACCEL_YOUT_H, 2);
+	  zAccel = MPU6881_GET_DATA(ACCEL_ZOUT_H, 2);
+
+	  xGyro = MPU6881_GET_DATA(GYRO_XOUT_H, 2);
+	  yGyro = MPU6881_GET_DATA(GYRO_YOUT_H, 2);
+	  zGyro = MPU6881_GET_DATA(GYRO_ZOUT_H, 2);
+
+	  HAL_Delay(1);
+
+	  UART_PRINT_TEXT("Accelerometer: ");
+	  UART_PRINT_TEXT("( ");
+	  UART_PRINT_VAL(xAccel);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(yAccel);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(zAccel);
+	  UART_PRINT_TEXT(" )\n");
+
+	  UART_PRINT_TEXT("Gyro: ");
+	  UART_PRINT_TEXT("( ");
+	  UART_PRINT_VAL(xGyro);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(yGyro);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(zGyro);
+	  UART_PRINT_TEXT(" )\n");
+
+	  HAL_Delay(100);
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -147,6 +218,54 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x30A0A7FB;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
+
 }
 
 /**
@@ -227,7 +346,59 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void UART_PRINT_VAL(double value){
+	char total[50];
+	char temp[10];
+	if(value < 0){
+	   UART_PRINT_TEXT("-");
+	}
+	sprintf(total, "%i", abs((int)value));
+	strcat(total, ".");
+	double currentVal = (value - (int) value);
+	for(int a=0;a<6;a++){
+		currentVal *= 10;
+		sprintf(temp, "%i", abs((int)currentVal));
+		strcat(total, temp);
+		currentVal -= (int)currentVal;
+	}
+	HAL_UART_Transmit(&huart2, total, strlen(total), 100);
+}
 
+
+void UART_PRINT_TEXT(uint8_t* MSG){
+	HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
+}
+
+void MPU6881_INIT(void){
+	uint8_t PWR_MGMT_1[1] = {0x9};
+	HAL_I2C_Mem_Write(&hi2c1, MPU6881_ADDR, 0x6B, 1, PWR_MGMT_1, 1, HAL_MAX_DELAY);
+
+	uint8_t PWR_MGMT_2[1] = {0x0};
+	HAL_I2C_Mem_Write(&hi2c1, MPU6881_ADDR, 0x6C, 1, PWR_MGMT_2, 1, HAL_MAX_DELAY);
+
+	uint8_t I2C_IF[1] = {0x0};
+	HAL_I2C_Mem_Write(&hi2c1, MPU6881_ADDR, 0x70, 1, I2C_IF, 1, HAL_MAX_DELAY);
+}
+
+
+double MPU6881_GET_DATA(uint8_t addr, uint16_t dataSize){
+	double val = 0;
+	uint16_t value = 0;
+	uint8_t receiveData[dataSize];
+	HAL_I2C_Mem_Read(&hi2c1, MPU6881_ADDR, addr, 1, receiveData, dataSize, 100);
+	value = (receiveData[1] << 8 | receiveData[0]);
+	if(value > 0x7fff){
+		value = ~value;
+		val = -value;
+	}
+	else{
+		val = value;
+	}
+
+	val *= 0.000061035; // (1/(2^15)) to get g
+
+	return val;
+}
 /* USER CODE END 4 */
 
 /**
