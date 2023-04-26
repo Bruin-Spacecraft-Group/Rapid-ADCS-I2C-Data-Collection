@@ -34,7 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MPU6881_ADDR 0x00
+#define MPU6881_ADDR 0x68<<1
 #define ACCEL_XOUT_H 0x3B
 #define ACCEL_XOUT_L 0x3C
 #define ACCEL_YOUT_H 0x3D
@@ -80,7 +80,6 @@ double MPU6881_GET_DATA(uint8_t addr, uint16_t dataSize);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t ADDR_TEST = 0x00;
 /* USER CODE END 0 */
 
 /**
@@ -131,14 +130,7 @@ int main(void)
   while (1)
   {
 
-	  ADDR_TEST++;
-	  if(ADDR_TEST > 0xFE){
-		  ADDR_TEST = 0x00;
-	  }
-	  xAccel = MPU6881_GET_DATA(0x77, 1); // this will read H reg and then L reg?
-	  UART_PRINT_TEXT("#");
-	  UART_PRINT_VAL((double)ADDR_TEST);
-	  UART_PRINT_TEXT("\n Result: ");
+	  xAccel = MPU6881_GET_DATA(ACCEL_XOUT_H, 2); // this will read H reg and then L reg?
 	  UART_PRINT_VAL(xAccel);
 	  UART_PRINT_TEXT("\n");
 	  /*
@@ -392,9 +384,8 @@ double MPU6881_GET_DATA(uint8_t addr, uint16_t dataSize){
 	double val = 0;
 	uint16_t value = 0;
 	uint8_t receiveData[dataSize];
-	uint8_t address = ADDR_TEST<<1;
-	HAL_I2C_Mem_Read(&hi2c1, address, addr, 1, receiveData, dataSize, 100);
-	/*
+	HAL_I2C_Mem_Read(&hi2c1, MPU6881_ADDR, addr, 1, receiveData, dataSize, 100);
+
 	value = (receiveData[1] << 8 | receiveData[0]);
 	if(value > 0x7fff){
 		value = ~value;
@@ -404,8 +395,6 @@ double MPU6881_GET_DATA(uint8_t addr, uint16_t dataSize){
 		val = value;
 	}
 
-	val *= 0.000061035; // (1/(2^15)) to get g
-	*/
 
 	return val;
 }
