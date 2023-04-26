@@ -106,9 +106,9 @@ int main(void)
 	double yGyro = 0;
 	double zGyro = 0;
 
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 
-	HAL_Delay(250);
+	HAL_Delay(500);
 	UM7_INIT();
 	HAL_Delay(250);
   /* USER CODE END 2 */
@@ -121,12 +121,15 @@ int main(void)
 	  //yAccel = UM7_GET_DATA(0X66);
 	  //zAccel = UM7_GET_DATA(0x67);
 
+	  /*
 	  uint8_t rx_data[11] = {0};
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 	  HAL_UART_Receive(&huart1, rx_data, 11, 50);
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 	  UART_PRINT_TEXT(rx_data);
 	  UART_PRINT_TEXT("\n");
+	  */
+
 	  //UART_PRINT_TEXT("Accelerometer: ");
 	  //UART_PRINT_TEXT("( ");
 	  //UART_PRINT_VAL(xAccel);
@@ -367,15 +370,12 @@ void UART_PRINT_TEXT(uint8_t* MSG){
 }
 
 void UM7_INIT(void){
-	uint8_t tx_data2[4] = {0x00, 0x00, 0x00, 0x00};
-	uint8_t tx_data1[4] = {0x00, 0x00, 0x00, 0xff};
-	uint8_t tx_data3[4] = {0x00, 0x00, 0x00, 0xff};
-	UM7_WRITE(0xac, tx_data2); // reset to factory settings
-	HAL_Delay(1);
-	//UM7_WRITE(0x02, tx_data2); // raw data rate (Hz)
-	//UM7_WRITE(0x04, tx_data2); // processed data rate (Hz)
-	uint8_t tx_data4[4] = {0x00, 0x00, 0x00, 0x00};
-	UM7_WRITE(0x07, tx_data4);
+	uint8_t tx_dataZero[4] = {0x00, 0x00, 0x00, 0x00};
+	UM7_WRITE(0x02, tx_dataZero);
+	UM7_WRITE(0x04, tx_dataZero);
+	UM7_WRITE(0x05, tx_dataZero);
+	UM7_WRITE(0x06, tx_dataZero);
+	UM7_WRITE(0x07, tx_dataZero);
 	HAL_Delay(5);
 }
 void UM7_WRITE(uint8_t addr, uint8_t data[4]){
