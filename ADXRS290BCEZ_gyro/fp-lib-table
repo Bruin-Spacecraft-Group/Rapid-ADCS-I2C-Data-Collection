@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "ADXRS290BCEZ")(type "KiCad")(uri "${KIPRJMOD}/ADXRS290BCEZ.pretty")(options "")(descr ""))
+)
