@@ -1,11 +1,11 @@
-21672195632933973
+21670853725432933
 ADXRS290BCEZ
 18-LFLGA
 LGA, 16 Pin (http://www.st.com/resource/en/datasheet/l3gd20.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
 LGA NoLead
 0
-16
-16
+18
+1
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -2414,20 +2414,6 @@ speaker CUI
 0
 2
 2
-CNC_CONNECTORS
-PinHeader_2x04_P1.27mm_Vertical_SMD_CONNECTOR
-surface-mounted straight pin header, 2x04, 1.27mm pitch, double rows
-Surface mounted pin header SMD 2x04 1.27mm double row
-0
-8
-8
-CNC_CONNECTORS
-PinHeader_2x08_P1.27mm_Vertical
-Through hole straight pin header, 2x08, 1.27mm pitch, double rows
-Through hole pin header THT 2x08 1.27mm double row
-0
-16
-16
 Calibration_Scale
 Gauge_10mm_Type1_CopperTop
 Gauge, Massstab, 10mm, CopperTop, Type 1,
