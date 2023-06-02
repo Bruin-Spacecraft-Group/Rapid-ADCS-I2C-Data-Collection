@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "IAM-20380HT")(type "KiCad")(uri "${KIPRJMOD}/imported libraries/IAM-20380")(options "")(descr ""))
+)
