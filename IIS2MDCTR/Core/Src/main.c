@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,18 +35,24 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
 #define IIS2_ADDR 0x1E
 #define OUTX_L 0x68
 #define OUTY_L 0x6A
 #define OUTZ_L 0x6C
-#define OUTZ_H 0x6D
 #define CFG_REG_A 0x60
 #define CFG_REG_B 0x61
 #define CFG_REG_C 0x62
 
-
-
+#define BNO055_ADDR 0x29<<1 // PULL ADR HIGH
+#define BNO055_ACCEL_X 0x08
+#define BNO055_ACCEL_Y 0x0a
+#define BNO055_ACCEL_Z 0x0c
+#define BNO055_MAG_X 0x0e
+#define BNO055_MAG_Y 0x10
+#define BNO055_MAG_Z 0x12
+#define BNO055_GYRO_X 0x14
+#define BNO055_GYRO_Y 0x16
+#define BNO055_GYRO_Z 0x18
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,11 +62,13 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
-ADC_HandleTypeDef hadc2;
+
+I2C_HandleTypeDef hi2c1;
 
 SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim2;
 
 UART_HandleTypeDef huart2;
 
@@ -72,14 +81,18 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
-static void MX_ADC1_Init(void);
 static void MX_SPI1_Init(void);
-static void MX_ADC2_Init(void);
+static void MX_TIM2_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 void UART_PRINT_VAL(double value);
 void UART_PRINT_TEXT(uint8_t* MSG);
 void IIS2_INIT(void);
 int IIS2_GET_DATA(uint8_t addr, uint16_t dataSize);
+void MAGNETORQUER_SET_PWM(int val, int dir);
+void BNO055_INIT(void);
+int BNO055_GET_DATA(uint8_t addr, uint16_t dataSize);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -94,7 +107,6 @@ int IIS2_GET_DATA(uint8_t addr, uint16_t dataSize);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -117,75 +129,100 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_TIM1_Init();
-  MX_ADC1_Init();
   MX_SPI1_Init();
-  MX_ADC2_Init();
+  MX_TIM2_Init();
+  MX_I2C1_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  uint32_t adc2_val;
-  double adc2_value;
-  int pwm_val = 500;
-  uint32_t adc1_val;
-  double adc1_value;
-  uint32_t nFault;
+  	int pwm_val = 500;
+  	uint32_t adc1_val;
+  	double adc1_value;
 
-  uint16_t xData = 0;
-  uint16_t yData = 0;
-  uint16_t zData = 0;
-  double xDataRef = 0;
-  double yDataRef = 0;
-  double zDataRef = 0;
+  	int xMag = 0;
+  	int yMag = 0;
+  	int zMag = 0;
+  	double xMagRef = 0;
+  	double yMagRef = 0;
+  	double zMagRef = 0;
 
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-  TIM1->CCR1 = 500;
+  	int BNOxAccel = 0;
+  	int BNOyAccel = 0;
+  	int BNOzAccel = 0;
+  	int BNOxMag = 0;
+  	int BNOyMag = 0;
+  	int BNOzMag = 0;
+  	int BNOxGyro = 0;
+  	int BNOyGyro = 0;
+  	int BNOzGyro = 0;
+  	double BNOxAccelRef = 0;
+  	double BNOyAccelRef = 0;
+  	double BNOzAccelRef = 0;
+  	double BNOxMagRef = 0;
+  	double BNOyMagRef = 0;
+  	double BNOzMagRef = 0;
+  	double BNOxGyroRef = 0;
+  	double BNOyGyroRef = 0;
+  	double BNOzGyroRef = 0;
+
+  	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  	TIM1->CCR1 = 500;
+  	HAL_TIM_Base_Start(&htim2);
 
 
+  	//IIS2_INIT();
+  	BNO055_INIT();
 
+  	int counter = 0;
+
+  	int excessTime = 0;
+  	double currentTime = 0;
+
+  	double IPROPI_res_value = 50;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
   while (1)
   {
-	  IIS2_INIT();
-	  UART_PRINT_VAL(-100);
-	  xData = IIS2_GET_DATA(OUTX_L, 1);
-	  yData = IIS2_GET_DATA(OUTY_L, 1);
-	  zData = IIS2_GET_DATA(OUTZ_L, 1);
-	  xDataRef = xData*.15;
-	  yDataRef = yData*.15;
-	  zDataRef = zData*.15;
-	  UART_PRINT_TEXT("xData : ");
-	  UART_PRINT_VAL(xDataRef);
-	  UART_PRINT_TEXT("\n");
-
-	  UART_PRINT_TEXT("yData :");
-	  UART_PRINT_VAL(yDataRef);
-	  UART_PRINT_TEXT("\n");
-
-	  UART_PRINT_TEXT("zData :");
-	  UART_PRINT_VAL(zDataRef);
-	  UART_PRINT_TEXT("\n");
-	  HAL_Delay(20);
-
-	  HAL_ADC_Start(&hadc2);
-	  HAL_ADC_Start(&hadc1);
-	  adc2_val = HAL_ADC_GetValue(&hadc2);
-	  adc1_val = HAL_ADC_GetValue(&hadc1);
-	  adc2_value = adc2_val;
-	  adc1_value = adc1_val;
-
-	  if(adc2_value < 2048){ // direction 0
-	  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
-	  	pwm_val = 1000.0 * ((2048.0 - adc2_value) / 2048.0);
-	  	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, pwm_val);
-	  }
-	  else{ // direction 1
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
-	  	pwm_val = 1000.0 * ((adc2_value - 2048.0) / 2048.0);
-	  	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, pwm_val);
-	  }
-	  UART_PRINT_TEXT("\n");
+	  BNO055_INIT();
+	  BNOxAccel = BNO055_GET_DATA(BNO055_ACCEL_X, 2);
+	  BNOyAccel = BNO055_GET_DATA(BNO055_ACCEL_Y, 2);
+	  BNOzAccel = BNO055_GET_DATA(BNO055_ACCEL_Z, 2);
+	  BNOxMag = BNO055_GET_DATA(BNO055_MAG_X, 2);
+	  BNOyMag = BNO055_GET_DATA(BNO055_MAG_Y, 2);
+	  BNOzMag = BNO055_GET_DATA(BNO055_MAG_Z, 2);
+	  BNOxGyro = BNO055_GET_DATA(BNO055_GYRO_X, 2);
+	  BNOyGyro = BNO055_GET_DATA(BNO055_GYRO_Y, 2);
+	  BNOzGyro = BNO055_GET_DATA(BNO055_GYRO_Z, 2);
+	  BNOxAccelRef = BNOxAccel;
+	  BNOyAccelRef = BNOyAccel;
+	  BNOzAccelRef = BNOzAccel;
+	  BNOxMagRef = BNOxMag;
+	  BNOyMagRef = BNOyMag;
+	  BNOzMagRef = BNOzMag;
+	  BNOxGyroRef = BNOxGyro;
+	  BNOyGyroRef = BNOyGyro;
+	  BNOzGyroRef = BNOzGyro;
+	  UART_PRINT_TEXT("Accelerometer: (");
+	  UART_PRINT_VAL(BNOxAccelRef);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(BNOyAccelRef);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(BNOzAccelRef);
+	  UART_PRINT_TEXT(" )\nMagnetometer: (");
+	  UART_PRINT_VAL(BNOxMagRef);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(BNOyMagRef);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(BNOzMagRef);
+	  UART_PRINT_TEXT(" )\nGyro: (");
+	  UART_PRINT_VAL(BNOxGyroRef);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(BNOyGyroRef);
+	  UART_PRINT_TEXT(", ");
+	  UART_PRINT_VAL(BNOzGyroRef);
+	  UART_PRINT_TEXT(" )\n");
+	  HAL_Delay(100);
 
     /* USER CODE END WHILE */
 
@@ -309,61 +346,50 @@ static void MX_ADC1_Init(void)
 }
 
 /**
-  * @brief ADC2 Initialization Function
+  * @brief I2C1 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_ADC2_Init(void)
+static void MX_I2C1_Init(void)
 {
 
-  /* USER CODE BEGIN ADC2_Init 0 */
+  /* USER CODE BEGIN I2C1_Init 0 */
 
-  /* USER CODE END ADC2_Init 0 */
+  /* USER CODE END I2C1_Init 0 */
 
-  ADC_ChannelConfTypeDef sConfig = {0};
+  /* USER CODE BEGIN I2C1_Init 1 */
 
-  /* USER CODE BEGIN ADC2_Init 1 */
-
-  /* USER CODE END ADC2_Init 1 */
-
-  /** Common config
-  */
-  hadc2.Instance = ADC2;
-  hadc2.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
-  hadc2.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc2.Init.GainCompensation = 0;
-  hadc2.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc2.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  hadc2.Init.LowPowerAutoWait = DISABLE;
-  hadc2.Init.ContinuousConvMode = DISABLE;
-  hadc2.Init.NbrOfConversion = 1;
-  hadc2.Init.DiscontinuousConvMode = DISABLE;
-  hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc2.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc2.Init.DMAContinuousRequests = DISABLE;
-  hadc2.Init.Overrun = ADC_OVR_DATA_PRESERVED;
-  hadc2.Init.OversamplingMode = DISABLE;
-  if (HAL_ADC_Init(&hadc2) != HAL_OK)
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x30A0A7FB;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
   {
     Error_Handler();
   }
 
-  /** Configure Regular Channel
+  /** Configure Analogue filter
   */
-  sConfig.Channel = ADC_CHANNEL_1;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
-  sConfig.SingleDiff = ADC_SINGLE_ENDED;
-  sConfig.OffsetNumber = ADC_OFFSET_NONE;
-  sConfig.Offset = 0;
-  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN ADC2_Init 2 */
 
-  /* USER CODE END ADC2_Init 2 */
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
 
 }
 
@@ -490,6 +516,51 @@ static void MX_TIM1_Init(void)
 }
 
 /**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 1700;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 4.294967295E9;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -549,26 +620,23 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_9, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PF0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  /*Configure GPIO pin : PA1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
-  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA6 PA9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_9;
+  /*Configure GPIO pin : PA9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -606,7 +674,15 @@ void UART_PRINT_VAL(double value){
 void UART_PRINT_TEXT(uint8_t* MSG){
 	HAL_UART_Transmit(&huart2, MSG, strlen(MSG), 100);
 }
-
+void MAGNETORQUER_SET_PWM(int val, int dir){
+	if(dir){
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+	}
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, val);
+}
 void IIS2_INIT(void){
 	//uint8_t data[3] = {0x8C, 0x01, 0x01}; // OPERATION MODE, TEM COMP 100Hz CONTINUOUS MODE, ENABLE LPF, DATA READY INT
 	uint8_t data1[2] = {CFG_REG_A, 0x8c};
@@ -629,7 +705,8 @@ int IIS2_GET_DATA(uint8_t addr, uint16_t dataSize){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
 	value = (receiveData[1] << 8 | receiveData[0]);
 	if(value > 0x7fff){
-		val = ~value;
+		value = value - 0x01;
+		value = ~value;
 		val = -value;
 	}
 	else{
@@ -637,32 +714,25 @@ int IIS2_GET_DATA(uint8_t addr, uint16_t dataSize){
 	}
 	return val;
 }
-
-/*
-void IIS2_INIT(void){
-	uint8_t data[3] = {0x8C, 0x01, 0x01}; // OPERATION MODE, TEM COMP 100Hz CONTINUOUS MODE, ENABLE LPF, DATA READY INT
-	HAL_I2C_Mem_Write(&hi2c1, IIS2_ADDR, CFG_REG_A, 1, data[0], 1, 100); // TEMP COMP, 100Hz, CONTINUOUS MODE
-	HAL_I2C_Mem_Write(&hi2c1, IIS2_ADDR, CFG_REG_B, 1, data[1], 1, 100); // ENABLE LPF
-	HAL_I2C_Mem_Write(&hi2c1, IIS2_ADDR, CFG_REG_C, 1, data[2], 1, 100); // DATA READY INT
-
-
+void BNO055_INIT(void){
+	HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x3D, 1, 0x07, 1, 100); //OPR_MODE = AMG (turn on all sensors)
 }
-uint16_t IIS2_GET_DATA(uint8_t addr, uint16_t dataSize){
-	uint16_t val = 0;
+int BNO055_GET_DATA(uint8_t addr, uint16_t dataSize){
+	int val = 0;
 	uint16_t value = 0;
 	uint8_t receiveData[dataSize];
-	HAL_I2C_Mem_Read(&hi2c1, IIS2_ADDR, addr, 1, receiveData, dataSize, 100);
+	HAL_I2C_Mem_Read(&hi2c1, BNO055_ADDR, addr, 1, receiveData, dataSize, 100);
 	value = (receiveData[1] << 8 | receiveData[0]);
 	if(value > 0x7fff){
-		val = ~value;
+		value = value - 0x01;
+		value = ~value;
+		val = -value;
 	}
 	else{
 		val = value;
 	}
 	return val;
 }
-*/
-
 /* USER CODE END 4 */
 
 /**
