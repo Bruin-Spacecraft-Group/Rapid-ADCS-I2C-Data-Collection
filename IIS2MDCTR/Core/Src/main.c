@@ -83,8 +83,8 @@ static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM2_Init(void);
-static void MX_I2C1_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
 void UART_PRINT_VAL(double value);
 void UART_PRINT_TEXT(uint8_t* MSG);
@@ -131,8 +131,8 @@ int main(void)
   MX_TIM1_Init();
   MX_SPI1_Init();
   MX_TIM2_Init();
-  MX_I2C1_Init();
   MX_ADC1_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   	int pwm_val = 500;
   	uint32_t adc1_val;
@@ -168,61 +168,108 @@ int main(void)
   	TIM1->CCR1 = 500;
   	HAL_TIM_Base_Start(&htim2);
 
+  	//BNO055_INIT();
+  	IIS2_INIT();
 
-  	//IIS2_INIT();
-  	BNO055_INIT();
-
-  	int counter = 0;
-
-  	int excessTime = 0;
+  	double magCyclePeriod = 20;
   	double currentTime = 0;
-
   	double IPROPI_res_value = 50;
+  	double magCurrent = 0;
+  	double prevMagCurrent = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  BNO055_INIT();
-	  BNOxAccel = BNO055_GET_DATA(BNO055_ACCEL_X, 2);
-	  BNOyAccel = BNO055_GET_DATA(BNO055_ACCEL_Y, 2);
-	  BNOzAccel = BNO055_GET_DATA(BNO055_ACCEL_Z, 2);
-	  BNOxMag = BNO055_GET_DATA(BNO055_MAG_X, 2);
-	  BNOyMag = BNO055_GET_DATA(BNO055_MAG_Y, 2);
-	  BNOzMag = BNO055_GET_DATA(BNO055_MAG_Z, 2);
-	  BNOxGyro = BNO055_GET_DATA(BNO055_GYRO_X, 2);
-	  BNOyGyro = BNO055_GET_DATA(BNO055_GYRO_Y, 2);
-	  BNOzGyro = BNO055_GET_DATA(BNO055_GYRO_Z, 2);
-	  BNOxAccelRef = BNOxAccel;
-	  BNOyAccelRef = BNOyAccel;
-	  BNOzAccelRef = BNOzAccel;
-	  BNOxMagRef = BNOxMag;
-	  BNOyMagRef = BNOyMag;
-	  BNOzMagRef = BNOzMag;
-	  BNOxGyroRef = BNOxGyro;
-	  BNOyGyroRef = BNOyGyro;
-	  BNOzGyroRef = BNOzGyro;
-	  UART_PRINT_TEXT("Accelerometer: (");
-	  UART_PRINT_VAL(BNOxAccelRef);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(BNOyAccelRef);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(BNOzAccelRef);
-	  UART_PRINT_TEXT(" )\nMagnetometer: (");
-	  UART_PRINT_VAL(BNOxMagRef);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(BNOyMagRef);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(BNOzMagRef);
-	  UART_PRINT_TEXT(" )\nGyro: (");
-	  UART_PRINT_VAL(BNOxGyroRef);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(BNOyGyroRef);
-	  UART_PRINT_TEXT(", ");
-	  UART_PRINT_VAL(BNOzGyroRef);
-	  UART_PRINT_TEXT(" )\n");
-	  HAL_Delay(100);
+	  // BNO055 data outputs
+//	  BNO055_INIT();
+//	  BNOxAccel = BNO055_GET_DATA(BNO055_ACCEL_X, 2);
+//	  BNOyAccel = BNO055_GET_DATA(BNO055_ACCEL_Y, 2);
+//	  BNOzAccel = BNO055_GET_DATA(BNO055_ACCEL_Z, 2);
+//	  BNOxMag = BNO055_GET_DATA(BNO055_MAG_X, 2);
+//	  BNOyMag = BNO055_GET_DATA(BNO055_MAG_Y, 2);
+//	  BNOzMag = BNO055_GET_DATA(BNO055_MAG_Z, 2);
+//	  BNOxGyro = BNO055_GET_DATA(BNO055_GYRO_X, 2);
+//	  BNOyGyro = BNO055_GET_DATA(BNO055_GYRO_Y, 2);
+//	  BNOzGyro = BNO055_GET_DATA(BNO055_GYRO_Z, 2);
+//	  BNOxAccelRef = BNOxAccel;
+//	  BNOyAccelRef = BNOyAccel;
+//	  BNOzAccelRef = BNOzAccel;
+//	  BNOxMagRef = BNOxMag;
+//	  BNOyMagRef = BNOyMag;
+//	  BNOzMagRef = BNOzMag;
+//	  BNOxGyroRef = BNOxGyro;
+//	  BNOyGyroRef = BNOyGyro;
+//	  BNOzGyroRef = BNOzGyro;
+//	  UART_PRINT_TEXT("Accelerometer: (");
+//	  UART_PRINT_VAL(BNOxAccelRef);
+//	  UART_PRINT_TEXT(", ");
+//	  UART_PRINT_VAL(BNOyAccelRef);
+//	  UART_PRINT_TEXT(", ");
+//	  UART_PRINT_VAL(BNOzAccelRef);
+//	  UART_PRINT_TEXT(" )\nMagnetometer: (");
+//	  UART_PRINT_VAL(BNOxMagRef);
+//	  UART_PRINT_TEXT(", ");
+//	  UART_PRINT_VAL(BNOyMagRef);
+//	  UART_PRINT_TEXT(", ");
+//	  UART_PRINT_VAL(BNOzMagRef);
+//	  UART_PRINT_TEXT(" )\nGyro: (");
+//	  UART_PRINT_VAL(BNOxGyroRef);
+//	  UART_PRINT_TEXT(", ");
+//	  UART_PRINT_VAL(BNOyGyroRef);
+//	  UART_PRINT_TEXT(", ");
+//	  UART_PRINT_VAL(BNOzGyroRef);
+//	  UART_PRINT_TEXT(" )\n");
+//	  HAL_Delay(100);
+
+	  // magnetorquer driver
+	  currentTime = ((double)(TIM2->CNT)) / 100000.0;
+	  if(currentTime < magCyclePeriod * 0.25){
+		  MAGNETORQUER_SET_PWM((int)(currentTime * (4000.0 / magCyclePeriod)), 1);
+	  }
+	  else if(currentTime < magCyclePeriod * 0.5){
+		  MAGNETORQUER_SET_PWM((int)(1000.0 - (currentTime - (magCyclePeriod * 0.25)) * (4000.0 / magCyclePeriod)), 1);
+	  }
+	  else if(currentTime < magCyclePeriod * 0.75){
+		  MAGNETORQUER_SET_PWM((int)((currentTime - (magCyclePeriod * 0.5)) * (4000.0 / magCyclePeriod)), 0);
+	  }
+	  else if(currentTime < magCyclePeriod){
+		  MAGNETORQUER_SET_PWM((int)(1000.0 - (currentTime - (magCyclePeriod * 0.75)) * (4000.0 / magCyclePeriod)), 0);
+	  }
+	  else{
+		  TIM2->CNT = 0;
+	  }
+	  HAL_ADC_Start(&hadc1);
+	  magCurrent = ((((double) HAL_ADC_GetValue(&hadc1)) / 4096.0) * 3.3) / IPROPI_res_value;
+
+	  // IIS2MDCTR data outputs
+	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)){
+		  xMag = IIS2_GET_DATA(OUTX_L, 1);
+		  xMagRef = ((double) xMag) * 0.15;
+		  yMag = IIS2_GET_DATA(OUTY_L, 1);
+		  yMagRef = ((double) yMag) * 0.15;
+		  zMag = IIS2_GET_DATA(OUTZ_L, 1);
+		  zMagRef = ((double) zMag) * 0.15;
+//		  UART_PRINT_TEXT("Mag: (");
+//		  UART_PRINT_VAL(xMagRef);
+//		  UART_PRINT_TEXT(", ");
+//		  UART_PRINT_VAL(yMagRef);
+//		  UART_PRINT_TEXT(", ");
+//		  UART_PRINT_VAL(zMagRef);
+//		  UART_PRINT_TEXT(")\n");
+		  if(sqrt(pow(magCurrent - prevMagCurrent, 2)) > 0.00025){
+			  if(currentTime < magCyclePeriod * 0.5){
+				  UART_PRINT_TEXT("-");
+			  }
+			  UART_PRINT_VAL(magCurrent);
+			  UART_PRINT_TEXT(" ");
+			  UART_PRINT_VAL(yMagRef);
+			  UART_PRINT_TEXT("\n");
+			  prevMagCurrent = magCurrent;
+		  }
+	  }
+
 
     /* USER CODE END WHILE */
 
@@ -624,7 +671,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9|GPIO_PIN_10, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
@@ -635,8 +682,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PA9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  /*Configure GPIO pins : PA9 PA10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -684,25 +731,24 @@ void MAGNETORQUER_SET_PWM(int val, int dir){
 	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, val);
 }
 void IIS2_INIT(void){
-	//uint8_t data[3] = {0x8C, 0x01, 0x01}; // OPERATION MODE, TEM COMP 100Hz CONTINUOUS MODE, ENABLE LPF, DATA READY INT
 	uint8_t data1[2] = {CFG_REG_A, 0x8c};
 	uint8_t data2[2] = {CFG_REG_B, 0x01};
 	uint8_t data3[2] = {CFG_REG_C, 0x21};
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi1, data1, 2, 100); // TEMP COMP, 100Hz, CONTINUOUS MODE
 	HAL_SPI_Transmit(&hspi1, data2, 2, 100); // ENABLE LPF
 	HAL_SPI_Transmit(&hspi1, data3, 2, 100); // DATA READY INT, DISABLE I2C
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
 }
 int IIS2_GET_DATA(uint8_t addr, uint16_t dataSize){
 	int val = 0;
 	uint16_t value = 0;
 	uint8_t sendData[1] = {0x80 | addr};
 	uint8_t receiveData[2];
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi1, sendData, 1, 100);
 	HAL_SPI_Receive(&hspi1, receiveData, 2, 100);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
 	value = (receiveData[1] << 8 | receiveData[0]);
 	if(value > 0x7fff){
 		value = value - 0x01;
@@ -716,6 +762,9 @@ int IIS2_GET_DATA(uint8_t addr, uint16_t dataSize){
 }
 void BNO055_INIT(void){
 	HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x3D, 1, 0x07, 1, 100); //OPR_MODE = AMG (turn on all sensors)
+	//HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x3D, 1, 0x02, 1, 100); //OPR_MODE = MAG_ONLY (turn on magnetometer sensor)
+	HAL_Delay(20);
+	HAL_I2C_Mem_Write(&hi2c1, BNO055_ADDR, 0x09, 1, 0x1f, 1, 100); // magnetorquer power mode to NORMAL, ODR = 30HZ, high accuracy mode
 }
 int BNO055_GET_DATA(uint8_t addr, uint16_t dataSize){
 	int val = 0;
