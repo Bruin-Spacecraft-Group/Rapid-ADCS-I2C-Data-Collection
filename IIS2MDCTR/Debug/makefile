@@ -60,8 +60,8 @@ all: main-build
 main-build: IIS2MDCTR.elf secondary-outputs
 
 # Tool invocations
-IIS2MDCTR.elf IIS2MDCTR.map: $(OBJS) $(USER_OBJS) /Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/IIS2MDCTR/STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "IIS2MDCTR.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/madcloud123/Documents/GitHub/Rapid-ACDS-I2C-Data-Collection/IIS2MDCTR/STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IIS2MDCTR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+IIS2MDCTR.elf IIS2MDCTR.map: $(OBJS) $(USER_OBJS) C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\IIS2MDCTR\STM32G431KBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "IIS2MDCTR.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\munng\OneDrive\Documents\GitHub\Rapid-ACDS-I2C-Data-Collection\IIS2MDCTR\STM32G431KBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="IIS2MDCTR.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
