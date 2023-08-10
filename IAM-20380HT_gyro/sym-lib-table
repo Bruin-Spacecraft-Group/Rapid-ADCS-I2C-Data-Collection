@@ -1,5 +1,0 @@
-(sym_lib_table
-  (version 7)
-  (lib (name "IAM-20380HT")(type "KiCad")(uri "${KIPRJMOD}/imported libraries/IAM-20380/IAM-20380.kicad_sym")(options "")(descr ""))
-  (lib (name "Headers")(type "KiCad")(uri "${KIPRJMOD}/Headers.kicad_sym")(options "")(descr ""))
-)
